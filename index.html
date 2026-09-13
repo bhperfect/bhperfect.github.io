@@ -1,0 +1,6454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trip Journal</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            background: #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .legend {
+            margin: 0 0 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .legend-line {
+            width: 30px;
+            height: 4px;
+        }
+
+        .trip-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .trip-card {
+            display: block;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            background: white;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .trip-card:hover {
+            background: #eee;
+        }
+
+        .trip-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .trip-meta {
+            color: #666;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Trip Journal</h1>
+</header>
+
+<main>
+
+    <h2>Trips Map</h2>
+
+    <div class="legend">
+        <div class="legend-item">
+            <span class="legend-line" style="background: green;"></span>
+            Hike
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-line" style="background: blue;"></span>
+            Ski
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-line" style="background: red;"></span>
+            Mountaineering
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-line" style="background: orange;"></span>
+            Bike
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-line" style="background: purple;"></span>
+            Climb
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <h2>Trips</h2>
+
+    <div class="trip-list">
+
+        
+
+            <a
+                class="trip-card"
+                href="2026-08-15-mount-shasta/"
+            >
+                <div class="trip-title">
+                    Mount Shasta via Avalanche Gulch
+                </div>
+
+                <div class="trip-meta">
+                    2026-08-15
+
+                    
+                        – 2026-08-17
+                    
+
+                    · mountaineering
+                </div>
+
+                
+                    <p>
+                        A synthetic two-day ascent of Mount Shasta via Avalanche Gulch.
+                    </p>
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="1111-11-11-Example/"
+            >
+                <div class="trip-title">
+                    A testing trip to exercise code constructs
+                </div>
+
+                <div class="trip-meta">
+                    2026-08-15
+
+                    
+                        – 2026-08-17
+                    
+
+                    · mountaineering
+                </div>
+
+                
+                    <p>
+                        A synthetic two-day ascent of Mount Shasta via Avalanche Gulch.
+                    </p>
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c08d6fd9edef/"
+            >
+                <div class="trip-title">
+                    Death Ride
+                </div>
+
+                <div class="trip-meta">
+                    2026-07-11
+
+                    
+                        – 2026-07-11
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-26db1fb639fd/"
+            >
+                <div class="trip-title">
+                    Rogue River
+                </div>
+
+                <div class="trip-meta">
+                    2026-06-22
+
+                    
+                        – 2026-06-22
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-76f1c1e61687/"
+            >
+                <div class="trip-title">
+                    Wasson Peak
+                </div>
+
+                <div class="trip-meta">
+                    2026-06-01
+
+                    
+                        – 2026-06-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-388b02088d0e/"
+            >
+                <div class="trip-title">
+                    Dana
+                </div>
+
+                <div class="trip-meta">
+                    2026-05-30
+
+                    
+                        – 2026-05-30
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-1dd6f2964957/"
+            >
+                <div class="trip-title">
+                    Santa Fe Baldy
+                </div>
+
+                <div class="trip-meta">
+                    2026-05-21
+
+                    
+                        – 2026-05-21
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-9655dfd023b8/"
+            >
+                <div class="trip-title">
+                    Crescent Moon Couloir
+                </div>
+
+                <div class="trip-meta">
+                    2026-04-25
+
+                    
+                        – 2026-04-25
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-519717f1985a/"
+            >
+                <div class="trip-title">
+                    Lassen
+                </div>
+
+                <div class="trip-meta">
+                    2026-03-28
+
+                    
+                        – 2026-03-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-56649f59f137/"
+            >
+                <div class="trip-title">
+                    Ostrander
+                </div>
+
+                <div class="trip-meta">
+                    2026-02-27
+
+                    
+                        – 2026-03-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-3166ceaf01c8/"
+            >
+                <div class="trip-title">
+                    Yangmingshan
+                </div>
+
+                <div class="trip-meta">
+                    2026-02-20
+
+                    
+                        – 2026-02-20
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-166d882dc085/"
+            >
+                <div class="trip-title">
+                    Tallac
+                </div>
+
+                <div class="trip-meta">
+                    2025-11-01
+
+                    
+                        – 2025-11-02
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-addba8365e3d/"
+            >
+                <div class="trip-title">
+                    Wyoming Scramble
+                </div>
+
+                <div class="trip-meta">
+                    2025-10-02
+
+                    
+                        – 2025-10-02
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-4256a1cba6be/"
+            >
+                <div class="trip-title">
+                    Black Bute
+                </div>
+
+                <div class="trip-meta">
+                    2025-09-19
+
+                    
+                        – 2025-09-19
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f5d405afffd2/"
+            >
+                <div class="trip-title">
+                    River float!
+                </div>
+
+                <div class="trip-meta">
+                    2025-07-13
+
+                    
+                        – 2025-07-13
+                    
+
+                    · kayak
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-6d0634497f07/"
+            >
+                <div class="trip-title">
+                    Mount Tamalpais - West Peak
+                </div>
+
+                <div class="trip-meta">
+                    2025-05-03
+
+                    
+                        – 2025-05-03
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-42dfa6e264b0/"
+            >
+                <div class="trip-title">
+                    Mount Weird
+                </div>
+
+                <div class="trip-meta">
+                    2025-03-08
+
+                    
+                        – 2025-03-08
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-6d0195e1da8c/"
+            >
+                <div class="trip-title">
+                    Jackson Hole Backcountry
+                </div>
+
+                <div class="trip-meta">
+                    2025-02-12
+
+                    
+                        – 2025-02-12
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-96b28f380b32/"
+            >
+                <div class="trip-title">
+                    Source Lake
+                </div>
+
+                <div class="trip-meta">
+                    2025-01-30
+
+                    
+                        – 2025-01-30
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-9460c7f89c70/"
+            >
+                <div class="trip-title">
+                    Elephants Back
+                </div>
+
+                <div class="trip-meta">
+                    2025-01-05
+
+                    
+                        – 2025-01-05
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-fe89f93c01d3/"
+            >
+                <div class="trip-title">
+                    Silver Peak
+                </div>
+
+                <div class="trip-meta">
+                    2024-12-07
+
+                    
+                        – 2024-12-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-7ca1d3375231/"
+            >
+                <div class="trip-title">
+                    Donner Peak
+                </div>
+
+                <div class="trip-meta">
+                    2024-10-19
+
+                    
+                        – 2024-10-19
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-8724d00e6d4c/"
+            >
+                <div class="trip-title">
+                    Bear Creek Spire
+                </div>
+
+                <div class="trip-meta">
+                    2024-08-03
+
+                    
+                        – 2024-08-03
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-da44044a0fcd/"
+            >
+                <div class="trip-title">
+                    Las Trampas Peak
+                </div>
+
+                <div class="trip-meta">
+                    2024-07-27
+
+                    
+                        – 2024-07-27
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-b4f3a463c98c/"
+            >
+                <div class="trip-title">
+                    Olympus
+                </div>
+
+                <div class="trip-meta">
+                    2024-07-19
+
+                    
+                        – 2024-07-21
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f89ad0134317/"
+            >
+                <div class="trip-title">
+                    Eichorn Pinnacle
+                </div>
+
+                <div class="trip-meta">
+                    2024-06-30
+
+                    
+                        – 2024-06-30
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-6c733d67ecf0/"
+            >
+                <div class="trip-title">
+                    Trillium Falls
+                </div>
+
+                <div class="trip-meta">
+                    2024-05-22
+
+                    
+                        – 2024-05-22
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-42b713d9403a/"
+            >
+                <div class="trip-title">
+                    Umpquah Hot Springs
+                </div>
+
+                <div class="trip-meta">
+                    2024-05-21
+
+                    
+                        – 2024-05-21
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-9c148c58c8a2/"
+            >
+                <div class="trip-title">
+                    Rubicon Peak
+                </div>
+
+                <div class="trip-meta">
+                    2024-04-14
+
+                    
+                        – 2024-04-14
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-16e87a5391a4/"
+            >
+                <div class="trip-title">
+                    Independence Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2024-04-03
+
+                    
+                        – 2024-04-03
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-91223717407d/"
+            >
+                <div class="trip-title">
+                    Ostrander
+                </div>
+
+                <div class="trip-meta">
+                    2024-02-16
+
+                    
+                        – 2024-02-18
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-fe574b9a32b3/"
+            >
+                <div class="trip-title">
+                    Diamond Head
+                </div>
+
+                <div class="trip-meta">
+                    2023-10-24
+
+                    
+                        – 2023-10-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-189fdb492943/"
+            >
+                <div class="trip-title">
+                    Mount Conness
+                </div>
+
+                <div class="trip-meta">
+                    2023-09-26
+
+                    
+                        – 2023-09-27
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d055c518cf66/"
+            >
+                <div class="trip-title">
+                    Glacier NP
+                </div>
+
+                <div class="trip-meta">
+                    2023-08-30
+
+                    
+                        – 2023-09-02
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-266b880c5bc8/"
+            >
+                <div class="trip-title">
+                    Casaval Ridge
+                </div>
+
+                <div class="trip-meta">
+                    2023-05-19
+
+                    
+                        – 2023-05-20
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-3637e89c2b20/"
+            >
+                <div class="trip-title">
+                    Lincoln Peak
+                </div>
+
+                <div class="trip-meta">
+                    2023-04-01
+
+                    
+                        – 2023-04-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-bd3b85702181/"
+            >
+                <div class="trip-title">
+                    Bear Valley BC
+                </div>
+
+                <div class="trip-meta">
+                    2023-01-07
+
+                    
+                        – 2023-01-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-baad89134af7/"
+            >
+                <div class="trip-title">
+                    Flagpole Point
+                </div>
+
+                <div class="trip-meta">
+                    2022-11-06
+
+                    
+                        – 2022-11-06
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c776fbaa0245/"
+            >
+                <div class="trip-title">
+                    Dougherty Ridge
+                </div>
+
+                <div class="trip-meta">
+                    2022-08-28
+
+                    
+                        – 2022-08-28
+                    
+
+                    · run
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-2980240879fa/"
+            >
+                <div class="trip-title">
+                    Matthes Crest
+                </div>
+
+                <div class="trip-meta">
+                    2022-07-09
+
+                    
+                        – 2022-07-09
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f512d783ed12/"
+            >
+                <div class="trip-title">
+                    Mount Tamalpais - East Peak
+                </div>
+
+                <div class="trip-meta">
+                    2022-01-01
+
+                    
+                        – 2022-01-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-ecd602abea57/"
+            >
+                <div class="trip-title">
+                    Round Top
+                </div>
+
+                <div class="trip-meta">
+                    2021-12-19
+
+                    
+                        – 2021-12-19
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-2905d2dc06e5/"
+            >
+                <div class="trip-title">
+                    North Pickets
+                </div>
+
+                <div class="trip-meta">
+                    2021-07-24
+
+                    
+                        – 2021-07-31
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-83b16c14efcb/"
+            >
+                <div class="trip-title">
+                    Sentinel Dome
+                </div>
+
+                <div class="trip-meta">
+                    2021-02-27
+
+                    
+                        – 2021-02-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-e505773c41e3/"
+            >
+                <div class="trip-title">
+                    Mount Tallac
+                </div>
+
+                <div class="trip-meta">
+                    2021-01-16
+
+                    
+                        – 2021-01-17
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-efb3d08f7012/"
+            >
+                <div class="trip-title">
+                    Wrigley Backpack
+                </div>
+
+                <div class="trip-meta">
+                    2020-11-21
+
+                    
+                        – 2020-11-22
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f1b74f5254f5/"
+            >
+                <div class="trip-title">
+                    Fairview Dome
+                </div>
+
+                <div class="trip-meta">
+                    2020-10-30
+
+                    
+                        – 2020-10-30
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-3bc7893dce1d/"
+            >
+                <div class="trip-title">
+                    Castle Rock
+                </div>
+
+                <div class="trip-meta">
+                    2020-10-11
+
+                    
+                        – 2020-10-11
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-dd2db440139d/"
+            >
+                <div class="trip-title">
+                    Tenaya and Cathedral
+                </div>
+
+                <div class="trip-meta">
+                    2020-09-05
+
+                    
+                        – 2020-09-05
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-2454b188bed7/"
+            >
+                <div class="trip-title">
+                    Stately Pleasure Dome
+                </div>
+
+                <div class="trip-meta">
+                    2020-09-04
+
+                    
+                        – 2020-09-04
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-4a967604daaf/"
+            >
+                <div class="trip-title">
+                    Mount Conness
+                </div>
+
+                <div class="trip-meta">
+                    2020-08-07
+
+                    
+                        – 2020-08-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-b0d18b3559f7/"
+            >
+                <div class="trip-title">
+                    Sword Lake
+                </div>
+
+                <div class="trip-meta">
+                    2020-07-25
+
+                    
+                        – 2020-07-25
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-dcf59218f83f/"
+            >
+                <div class="trip-title">
+                    Stanislaus Peak
+                </div>
+
+                <div class="trip-meta">
+                    2020-07-24
+
+                    
+                        – 2020-07-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-77db9293194a/"
+            >
+                <div class="trip-title">
+                    Las Trampas
+                </div>
+
+                <div class="trip-meta">
+                    2020-01-19
+
+                    
+                        – 2020-01-19
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-37681c3f5d7f/"
+            >
+                <div class="trip-title">
+                    Round Top
+                </div>
+
+                <div class="trip-meta">
+                    2019-12-28
+
+                    
+                        – 2019-12-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-903a598eb468/"
+            >
+                <div class="trip-title">
+                    Las Trampas
+                </div>
+
+                <div class="trip-meta">
+                    2019-12-24
+
+                    
+                        – 2019-12-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-95d7fb83618d/"
+            >
+                <div class="trip-title">
+                    Big Sur Backpacking
+                </div>
+
+                <div class="trip-meta">
+                    2019-10-26
+
+                    
+                        – 2019-10-27
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-99bc8320605b/"
+            >
+                <div class="trip-title">
+                    Crystal Crag
+                </div>
+
+                <div class="trip-meta">
+                    2019-10-19
+
+                    
+                        – 2019-10-19
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f49df77c36c2/"
+            >
+                <div class="trip-title">
+                    Manure Pile Buttress
+                </div>
+
+                <div class="trip-meta">
+                    2019-08-16
+
+                    
+                        – 2019-08-16
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-17080bebad99/"
+            >
+                <div class="trip-title">
+                    Washington Column
+                </div>
+
+                <div class="trip-meta">
+                    2019-08-12
+
+                    
+                        – 2019-08-14
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-ebec725a38c4/"
+            >
+                <div class="trip-title">
+                    Stawamus Chief - First Summit
+                </div>
+
+                <div class="trip-meta">
+                    2019-08-07
+
+                    
+                        – 2019-08-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-633f31104475/"
+            >
+                <div class="trip-title">
+                    Glacier Peak
+                </div>
+
+                <div class="trip-meta">
+                    2019-08-01
+
+                    
+                        – 2019-08-03
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-ccdc45936b32/"
+            >
+                <div class="trip-title">
+                    Rainier Kautz
+                </div>
+
+                <div class="trip-meta">
+                    2019-07-27
+
+                    
+                        – 2019-07-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f6a574e60c69/"
+            >
+                <div class="trip-title">
+                    Goode and Storm King
+                </div>
+
+                <div class="trip-meta">
+                    2019-07-19
+
+                    
+                        – 2019-07-22
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-aa1da1a5224c/"
+            >
+                <div class="trip-title">
+                    Outer Space
+                </div>
+
+                <div class="trip-meta">
+                    2019-07-17
+
+                    
+                        – 2019-07-17
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-14c7889b5848/"
+            >
+                <div class="trip-title">
+                    Del Campo
+                </div>
+
+                <div class="trip-meta">
+                    2019-07-14
+
+                    
+                        – 2019-07-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-92a4cf0a92e6/"
+            >
+                <div class="trip-title">
+                    Rainier DC Attempt
+                </div>
+
+                <div class="trip-meta">
+                    2019-06-28
+
+                    
+                        – 2019-06-30
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-11d499accfbf/"
+            >
+                <div class="trip-title">
+                    Little Tahoma
+                </div>
+
+                <div class="trip-meta">
+                    2019-06-21
+
+                    
+                        – 2019-06-22
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-07a291592d7c/"
+            >
+                <div class="trip-title">
+                    Mt Ruth
+                </div>
+
+                <div class="trip-meta">
+                    2019-05-27
+
+                    
+                        – 2019-05-27
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-a48bd4c25e02/"
+            >
+                <div class="trip-title">
+                    Chiwaukum
+                </div>
+
+                <div class="trip-meta">
+                    2019-05-18
+
+                    
+                        – 2019-05-18
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c8da6469f8fd/"
+            >
+                <div class="trip-title">
+                    Takhlakh lake
+                </div>
+
+                <div class="trip-meta">
+                    2019-05-10
+
+                    
+                        – 2019-05-10
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-7eaffb90ab52/"
+            >
+                <div class="trip-title">
+                    Enchantments Thru Ski
+                </div>
+
+                <div class="trip-meta">
+                    2019-04-27
+
+                    
+                        – 2019-04-30
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-dd25a3555a56/"
+            >
+                <div class="trip-title">
+                    Mount Hyak
+                </div>
+
+                <div class="trip-meta">
+                    2019-04-24
+
+                    
+                        – 2019-04-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-b5ae29d17f9e/"
+            >
+                <div class="trip-title">
+                    Mount Hood
+                </div>
+
+                <div class="trip-meta">
+                    2019-03-30
+
+                    
+                        – 2019-03-31
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-9dbc9286027c/"
+            >
+                <div class="trip-title">
+                    Silver Peak (Attempt)
+                </div>
+
+                <div class="trip-meta">
+                    2019-02-02
+
+                    
+                        – 2019-02-02
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-6ace0063d925/"
+            >
+                <div class="trip-title">
+                    Dickerman Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2018-12-02
+
+                    
+                        – 2018-12-02
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-7f7ef24fde1a/"
+            >
+                <div class="trip-title">
+                    Dragontail Peak
+                </div>
+
+                <div class="trip-meta">
+                    2018-09-30
+
+                    
+                        – 2018-10-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-fec99831075d/"
+            >
+                <div class="trip-title">
+                    Half Dome
+                </div>
+
+                <div class="trip-meta">
+                    2018-08-14
+
+                    
+                        – 2018-08-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-4e7d91bcefee/"
+            >
+                <div class="trip-title">
+                    JMT
+                </div>
+
+                <div class="trip-meta">
+                    2018-07-29
+
+                    
+                        – 2018-08-11
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-ed832b64e706/"
+            >
+                <div class="trip-title">
+                    Silver Star and Burgundy
+                </div>
+
+                <div class="trip-meta">
+                    2018-07-07
+
+                    
+                        – 2018-07-08
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c27aead82f8f/"
+            >
+                <div class="trip-title">
+                    Argonaut and Colchuck
+                </div>
+
+                <div class="trip-meta">
+                    2018-06-24
+
+                    
+                        – 2018-06-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f76ea14fe6c5/"
+            >
+                <div class="trip-title">
+                    Red Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2018-06-17
+
+                    
+                        – 2018-06-17
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-08e4d8f7bfb9/"
+            >
+                <div class="trip-title">
+                    Pickets
+                </div>
+
+                <div class="trip-meta">
+                    2018-06-10
+
+                    
+                        – 2018-06-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-39422e4ccfdc/"
+            >
+                <div class="trip-title">
+                    Vesper Peak
+                </div>
+
+                <div class="trip-meta">
+                    2018-05-27
+
+                    
+                        – 2018-05-27
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d8ac6b79d0b2/"
+            >
+                <div class="trip-title">
+                    Mt. Baker Easton
+                </div>
+
+                <div class="trip-meta">
+                    2018-05-20
+
+                    
+                        – 2018-05-21
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-93945260c717/"
+            >
+                <div class="trip-title">
+                    Lane Peak (Attempt)
+                </div>
+
+                <div class="trip-meta">
+                    2018-04-22
+
+                    
+                        – 2018-04-22
+                    
+
+                    · ski
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-319256836189/"
+            >
+                <div class="trip-title">
+                    Ancient Lakes
+                </div>
+
+                <div class="trip-meta">
+                    2018-04-14
+
+                    
+                        – 2018-04-14
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-4ea1c416ca25/"
+            >
+                <div class="trip-title">
+                    Snoqualmie Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2018-03-03
+
+                    
+                        – 2018-03-03
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-e90ee4e809a1/"
+            >
+                <div class="trip-title">
+                    New Years 2017-18
+                </div>
+
+                <div class="trip-meta">
+                    2017-12-31
+
+                    
+                        – 2017-12-31
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-5687fb924d26/"
+            >
+                <div class="trip-title">
+                    After Six and Yosemite Falls
+                </div>
+
+                <div class="trip-meta">
+                    2017-12-22
+
+                    
+                        – 2017-12-23
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-b7a23b49e816/"
+            >
+                <div class="trip-title">
+                    Mount Defiance
+                </div>
+
+                <div class="trip-meta">
+                    2017-12-10
+
+                    
+                        – 2017-12-10
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-505df277c855/"
+            >
+                <div class="trip-title">
+                    North Mountain Lookout
+                </div>
+
+                <div class="trip-meta">
+                    2017-11-24
+
+                    
+                        – 2017-11-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-807ba8e75b70/"
+            >
+                <div class="trip-title">
+                    Park Butte Lookout
+                </div>
+
+                <div class="trip-meta">
+                    2017-11-24
+
+                    
+                        – 2017-11-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d3ca7bbd5186/"
+            >
+                <div class="trip-title">
+                    Hot Springs
+                </div>
+
+                <div class="trip-meta">
+                    2017-11-10
+
+                    
+                        – 2017-11-10
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c5c2bb22b61d/"
+            >
+                <div class="trip-title">
+                    Atrium Peak
+                </div>
+
+                <div class="trip-meta">
+                    2017-10-14
+
+                    
+                        – 2017-10-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-0ec48d065a79/"
+            >
+                <div class="trip-title">
+                    Wonderland Trail
+                </div>
+
+                <div class="trip-meta">
+                    2017-09-05
+
+                    
+                        – 2017-09-12
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f50e3ca54926/"
+            >
+                <div class="trip-title">
+                    Sloan West Face
+                </div>
+
+                <div class="trip-meta">
+                    2017-08-26
+
+                    
+                        – 2017-08-27
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-8d9bd7251071/"
+            >
+                <div class="trip-title">
+                    McClellan Butte
+                </div>
+
+                <div class="trip-meta">
+                    2017-07-30
+
+                    
+                        – 2017-07-30
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-4ec2c3466d21/"
+            >
+                <div class="trip-title">
+                    Emmons Winthrop
+                </div>
+
+                <div class="trip-meta">
+                    2017-07-21
+
+                    
+                        – 2017-07-23
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d380743c321e/"
+            >
+                <div class="trip-title">
+                    Black Peak
+                </div>
+
+                <div class="trip-meta">
+                    2017-07-08
+
+                    
+                        – 2017-07-09
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-084338cfbcbc/"
+            >
+                <div class="trip-title">
+                    Eldorado Peak
+                </div>
+
+                <div class="trip-meta">
+                    2017-07-04
+
+                    
+                        – 2017-07-05
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-466e9533256a/"
+            >
+                <div class="trip-title">
+                    The Tooth
+                </div>
+
+                <div class="trip-meta">
+                    2017-06-25
+
+                    
+                        – 2017-06-26
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-136b52bd578a/"
+            >
+                <div class="trip-title">
+                    Trappers Peak
+                </div>
+
+                <div class="trip-meta">
+                    2017-06-11
+
+                    
+                        – 2017-06-12
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-7539b4f24f1e/"
+            >
+                <div class="trip-title">
+                    Mount Hood
+                </div>
+
+                <div class="trip-meta">
+                    2017-06-03
+
+                    
+                        – 2017-06-04
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-03497292b082/"
+            >
+                <div class="trip-title">
+                    Shuksan
+                </div>
+
+                <div class="trip-meta">
+                    2017-05-21
+
+                    
+                        – 2017-05-21
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-4dcc9be78b7e/"
+            >
+                <div class="trip-title">
+                    Ingraham Direct
+                </div>
+
+                <div class="trip-meta">
+                    2017-05-06
+
+                    
+                        – 2017-05-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-5d254015a1bf/"
+            >
+                <div class="trip-title">
+                    Mt St Helens via Worm Flows
+                </div>
+
+                <div class="trip-meta">
+                    2017-04-16
+
+                    
+                        – 2017-04-16
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-8c40fd0aac0d/"
+            >
+                <div class="trip-title">
+                    Tusk o Granite
+                </div>
+
+                <div class="trip-meta">
+                    2017-02-25
+
+                    
+                        – 2017-02-25
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-47ec2600162d/"
+            >
+                <div class="trip-title">
+                    Olallie
+                </div>
+
+                <div class="trip-meta">
+                    2017-01-14
+
+                    
+                        – 2017-01-14
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-fa7adb71fcdb/"
+            >
+                <div class="trip-title">
+                    Las Trampas
+                </div>
+
+                <div class="trip-meta">
+                    2016-12-28
+
+                    
+                        – 2016-12-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-94e0be60e7ff/"
+            >
+                <div class="trip-title">
+                    Mt Teneriffe
+                </div>
+
+                <div class="trip-meta">
+                    2016-12-18
+
+                    
+                        – 2016-12-18
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-6237bef255ae/"
+            >
+                <div class="trip-title">
+                    The Eaglet
+                </div>
+
+                <div class="trip-meta">
+                    2016-12-11
+
+                    
+                        – 2016-12-11
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-a145182e2a75/"
+            >
+                <div class="trip-title">
+                    Liberty Bell and SEWS
+                </div>
+
+                <div class="trip-meta">
+                    2016-08-13
+
+                    
+                        – 2016-08-14
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d32103cf6562/"
+            >
+                <div class="trip-title">
+                    Lassen Peak
+                </div>
+
+                <div class="trip-meta">
+                    2016-08-07
+
+                    
+                        – 2016-08-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-7cf5d6d2a5a6/"
+            >
+                <div class="trip-title">
+                    Mount Shasta
+                </div>
+
+                <div class="trip-meta">
+                    2016-08-07
+
+                    
+                        – 2016-08-08
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-a2dd4caa0a22/"
+            >
+                <div class="trip-title">
+                    Hike with Mom
+                </div>
+
+                <div class="trip-meta">
+                    2016-08-05
+
+                    
+                        – 2016-08-05
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-9d58169fbba9/"
+            >
+                <div class="trip-title">
+                    Petrified Forest
+                </div>
+
+                <div class="trip-meta">
+                    2016-07-18
+
+                    
+                        – 2016-07-18
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-b9bc3106cc26/"
+            >
+                <div class="trip-title">
+                    Little Annapurna and Witches Tower
+                </div>
+
+                <div class="trip-meta">
+                    2016-06-26
+
+                    
+                        – 2016-06-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-9ed002d02515/"
+            >
+                <div class="trip-title">
+                    Baring Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2016-06-19
+
+                    
+                        – 2016-06-19
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-3a3e0409c524/"
+            >
+                <div class="trip-title">
+                    Mt Rainier
+                </div>
+
+                <div class="trip-meta">
+                    2016-06-04
+
+                    
+                        – 2016-06-05
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-75731bd2b64e/"
+            >
+                <div class="trip-title">
+                    Mt St Helens
+                </div>
+
+                <div class="trip-meta">
+                    2016-05-29
+
+                    
+                        – 2016-05-29
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-53558ba3b4e7/"
+            >
+                <div class="trip-title">
+                    Bandera
+                </div>
+
+                <div class="trip-meta">
+                    2016-05-01
+
+                    
+                        – 2016-05-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-5d41873b8b55/"
+            >
+                <div class="trip-title">
+                    UW Snow School Artist Point
+                </div>
+
+                <div class="trip-meta">
+                    2016-04-03
+
+                    
+                        – 2016-04-03
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-07911d55f155/"
+            >
+                <div class="trip-title">
+                    McClellan Butte
+                </div>
+
+                <div class="trip-meta">
+                    2016-03-23
+
+                    
+                        – 2016-03-23
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-a7b1a05dfd00/"
+            >
+                <div class="trip-title">
+                    Olallie Lake
+                </div>
+
+                <div class="trip-meta">
+                    2016-02-20
+
+                    
+                        – 2016-02-21
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d6fcbd3544b0/"
+            >
+                <div class="trip-title">
+                    Mt San Gorgonio
+                </div>
+
+                <div class="trip-meta">
+                    2016-02-06
+
+                    
+                        – 2016-02-06
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c90bc17543d9/"
+            >
+                <div class="trip-title">
+                    Huckleberry Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2016-01-31
+
+                    
+                        – 2016-01-31
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-909b63299005/"
+            >
+                <div class="trip-title">
+                    Mailbox Peak
+                </div>
+
+                <div class="trip-meta">
+                    2016-01-24
+
+                    
+                        – 2016-01-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-fb28870a5aa6/"
+            >
+                <div class="trip-title">
+                    Winthrop Snowshoe
+                </div>
+
+                <div class="trip-meta">
+                    2016-01-02
+
+                    
+                        – 2016-01-02
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-16e3a9c73e64/"
+            >
+                <div class="trip-title">
+                    Mazama Cross Country Ski
+                </div>
+
+                <div class="trip-meta">
+                    2016-01-01
+
+                    
+                        – 2016-01-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-0c203f687879/"
+            >
+                <div class="trip-title">
+                    New Years Bonfire
+                </div>
+
+                <div class="trip-meta">
+                    2015-12-31
+
+                    
+                        – 2015-12-31
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-07b1775c5325/"
+            >
+                <div class="trip-title">
+                    Mount Washington
+                </div>
+
+                <div class="trip-meta">
+                    2015-12-05
+
+                    
+                        – 2015-12-05
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-08bfc52ea485/"
+            >
+                <div class="trip-title">
+                    Mount Si
+                </div>
+
+                <div class="trip-meta">
+                    2015-11-15
+
+                    
+                        – 2015-11-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-16b5aa85c3f1/"
+            >
+                <div class="trip-title">
+                    Del Campo Peak
+                </div>
+
+                <div class="trip-meta">
+                    2015-08-21
+
+                    
+                        – 2015-08-23
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-18c26c84987c/"
+            >
+                <div class="trip-title">
+                    Banff
+                </div>
+
+                <div class="trip-meta">
+                    2015-08-12
+
+                    
+                        – 2015-08-17
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-7436101f0b81/"
+            >
+                <div class="trip-title">
+                    Bean Peak
+                </div>
+
+                <div class="trip-meta">
+                    2015-07-25
+
+                    
+                        – 2015-07-25
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-acf9ae5bfb1f/"
+            >
+                <div class="trip-title">
+                    Dirty Harrys Peak
+                </div>
+
+                <div class="trip-meta">
+                    2015-07-10
+
+                    
+                        – 2015-07-10
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-2c4edb8058f3/"
+            >
+                <div class="trip-title">
+                    Mount Buckner and Sahale
+                </div>
+
+                <div class="trip-meta">
+                    2015-06-27
+
+                    
+                        – 2015-06-28
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-56df51a61f49/"
+            >
+                <div class="trip-title">
+                    Rattlesnake Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2015-06-25
+
+                    
+                        – 2015-06-25
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c31c30cc8bb4/"
+            >
+                <div class="trip-title">
+                    Dragontail Peak
+                </div>
+
+                <div class="trip-meta">
+                    2015-05-28
+
+                    
+                        – 2015-05-29
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-49856118341e/"
+            >
+                <div class="trip-title">
+                    Kaleetan Peak
+                </div>
+
+                <div class="trip-meta">
+                    2015-05-27
+
+                    
+                        – 2015-05-27
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-5bb035d866bb/"
+            >
+                <div class="trip-title">
+                    Mount Baker
+                </div>
+
+                <div class="trip-meta">
+                    2015-05-23
+
+                    
+                        – 2015-05-24
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-c96161d22d17/"
+            >
+                <div class="trip-title">
+                    Vesper Peak
+                </div>
+
+                <div class="trip-meta">
+                    2015-02-22
+
+                    
+                        – 2015-02-22
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-a7a9e3fc6a32/"
+            >
+                <div class="trip-title">
+                    Green Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2014-12-13
+
+                    
+                        – 2014-12-13
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-3c846d30e4b6/"
+            >
+                <div class="trip-title">
+                    Mount Adams
+                </div>
+
+                <div class="trip-meta">
+                    2014-09-07
+
+                    
+                        – 2014-09-08
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-f8068cd33f71/"
+            >
+                <div class="trip-title">
+                    Mount Townsend
+                </div>
+
+                <div class="trip-meta">
+                    2014-09-07
+
+                    
+                        – 2014-09-07
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-419a2956bdf1/"
+            >
+                <div class="trip-title">
+                    Alpine Lakes Backpacking
+                </div>
+
+                <div class="trip-meta">
+                    2014-08-10
+
+                    
+                        – 2014-08-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-14c68efd7380/"
+            >
+                <div class="trip-title">
+                    Colchuck Peak
+                </div>
+
+                <div class="trip-meta">
+                    2014-06-15
+
+                    
+                        – 2014-06-15
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-428087c670ec/"
+            >
+                <div class="trip-title">
+                    Tiger Mountain
+                </div>
+
+                <div class="trip-meta">
+                    2014-05-20
+
+                    
+                        – 2014-05-20
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d194d0702c66/"
+            >
+                <div class="trip-title">
+                    Mount San Antonio
+                </div>
+
+                <div class="trip-meta">
+                    2013-05-01
+
+                    
+                        – 2013-05-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+            <a
+                class="trip-card"
+                href="trip-d3afa0fcf86a/"
+            >
+                <div class="trip-title">
+                    Mount Diablo
+                </div>
+
+                <div class="trip-meta">
+                    2002-01-01
+
+                    
+                        – 2002-01-01
+                    
+
+                    · 
+                </div>
+
+                
+            </a>
+
+        
+
+    </div>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script>
+
+    const activityColors = {
+        "hike": "green",
+        "ski": "blue",
+        "mountaineering": "red",
+        "bike": "orange",
+        "climb": "purple"
+    };
+
+
+    const map = L.map("map").setView(
+        [39.5, -120.0],
+        6
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const allLayers = [];
+
+
+    async function addTrack(
+        url,
+        tripTitle,
+        tripDate,
+        activity,
+        tripUrl
+    ) {
+
+        try {
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                console.error(
+                    "Could not load track:",
+                    url
+                );
+
+                return;
+            }
+
+
+            const geojson = await response.json();
+
+
+            const color =
+                activityColors[activity] || "black";
+
+
+            const layer = L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color: color,
+                        weight: 4,
+                        opacity: 0.8
+                    }
+                }
+            );
+
+
+            layer.bindPopup(
+                `
+                <strong>${tripTitle}</strong>
+                <br>
+
+                ${tripDate}
+                <br>
+
+                ${activity}
+                <br><br>
+
+                <a href="${tripUrl}">
+                    View trip →
+                </a>
+                `
+            );
+
+
+            layer.addTo(map);
+
+            allLayers.push(layer);
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error loading track:",
+                url,
+                error
+            );
+
+        }
+
+    }
+
+
+    async function loadTrips() {
+
+        const promises = [];
+
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "2026-08-15-mount-shasta/map/ascent.geojson",
+
+                        "Mount Shasta via Avalanche Gulch",
+
+                        "2026-08-15",
+
+                        "mountaineering",
+
+                        "2026-08-15-mount-shasta/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "1111-11-11-Example/map/ascent.geojson",
+
+                        "A testing trip to exercise code constructs",
+
+                        "2026-08-15",
+
+                        "mountaineering",
+
+                        "1111-11-11-Example/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-0c203f687879/map/2016_01_01_Track_BONFIRE.geojson",
+
+                        "New Years Bonfire",
+
+                        "2015-12-31",
+
+                        "",
+
+                        "trip-0c203f687879/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-16e3a9c73e64/map/2016_01_01_XC.geojson",
+
+                        "Mazama Cross Country Ski",
+
+                        "2016-01-01",
+
+                        "",
+
+                        "trip-16e3a9c73e64/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-fb28870a5aa6/map/2016_01_02_Track_SNOSHOE.geojson",
+
+                        "Winthrop Snowshoe",
+
+                        "2016-01-02",
+
+                        "",
+
+                        "trip-fb28870a5aa6/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-909b63299005/map/2016_01_24_Mailbox_Peak.geojson",
+
+                        "Mailbox Peak",
+
+                        "2016-01-24",
+
+                        "",
+
+                        "trip-909b63299005/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-c90bc17543d9/map/2016_01_31_Huckleberry.geojson",
+
+                        "Huckleberry Mountain",
+
+                        "2016-01-31",
+
+                        "",
+
+                        "trip-c90bc17543d9/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-d6fcbd3544b0/map/2016_02_06_Mt-San-Gorgonio.geojson",
+
+                        "Mt San Gorgonio",
+
+                        "2016-02-06",
+
+                        "",
+
+                        "trip-d6fcbd3544b0/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-a7b1a05dfd00/map/2016_02_20_Olallie_Lake.geojson",
+
+                        "Olallie Lake",
+
+                        "2016-02-20",
+
+                        "",
+
+                        "trip-a7b1a05dfd00/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-07911d55f155/map/2016_03_23_McClellan_Butte.geojson",
+
+                        "McClellan Butte",
+
+                        "2016-03-23",
+
+                        "",
+
+                        "trip-07911d55f155/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-5d41873b8b55/map/2016_04_03_SnowSchool.geojson",
+
+                        "UW Snow School Artist Point",
+
+                        "2016-04-03",
+
+                        "",
+
+                        "trip-5d41873b8b55/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-53558ba3b4e7/map/2016_05_01_Bandera.geojson",
+
+                        "Bandera",
+
+                        "2016-05-01",
+
+                        "",
+
+                        "trip-53558ba3b4e7/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-75731bd2b64e/map/2016_05_29_Mt_St_Helens.geojson",
+
+                        "Mt St Helens",
+
+                        "2016-05-29",
+
+                        "",
+
+                        "trip-75731bd2b64e/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-3a3e0409c524/map/2016_06_04_Mt_Rainier.geojson",
+
+                        "Mt Rainier",
+
+                        "2016-06-04",
+
+                        "",
+
+                        "trip-3a3e0409c524/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-9ed002d02515/map/2016_06_19_Baring_Mountain.geojson",
+
+                        "Baring Mountain",
+
+                        "2016-06-19",
+
+                        "",
+
+                        "trip-9ed002d02515/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-b9bc3106cc26/map/2016_06_26_Little_Annapurna_and_Witches_Tower.geojson",
+
+                        "Little Annapurna and Witches Tower",
+
+                        "2016-06-26",
+
+                        "",
+
+                        "trip-b9bc3106cc26/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-9d58169fbba9/map/2016_07_18_Petrified_Forest.geojson",
+
+                        "Petrified Forest",
+
+                        "2016-07-18",
+
+                        "",
+
+                        "trip-9d58169fbba9/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-a2dd4caa0a22/map/2016_08_05_Hike_with_Mom.geojson",
+
+                        "Hike with Mom",
+
+                        "2016-08-05",
+
+                        "",
+
+                        "trip-a2dd4caa0a22/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-d32103cf6562/map/2016_08_07_Lassen_Peak.geojson",
+
+                        "Lassen Peak",
+
+                        "2016-08-07",
+
+                        "",
+
+                        "trip-d32103cf6562/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-7cf5d6d2a5a6/map/2016_08_08_Mount_Shasta.geojson",
+
+                        "Mount Shasta",
+
+                        "2016-08-07",
+
+                        "",
+
+                        "trip-7cf5d6d2a5a6/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-a145182e2a75/map/2016_08_13_Liberty_Bell_and_SEWS.geojson",
+
+                        "Liberty Bell and SEWS",
+
+                        "2016-08-13",
+
+                        "",
+
+                        "trip-a145182e2a75/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-6237bef255ae/map/2016_12_11_The_Eaglet.geojson",
+
+                        "The Eaglet",
+
+                        "2016-12-11",
+
+                        "",
+
+                        "trip-6237bef255ae/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-94e0be60e7ff/map/2016_12_18_Mt_Teneriffe.geojson",
+
+                        "Mt Teneriffe",
+
+                        "2016-12-18",
+
+                        "",
+
+                        "trip-94e0be60e7ff/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-fa7adb71fcdb/map/2016_12_28_Las_Trampas.geojson",
+
+                        "Las Trampas",
+
+                        "2016-12-28",
+
+                        "",
+
+                        "trip-fa7adb71fcdb/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-47ec2600162d/map/2017_01_14_Olallie.geojson",
+
+                        "Olallie",
+
+                        "2017-01-14",
+
+                        "",
+
+                        "trip-47ec2600162d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-8c40fd0aac0d/map/2017_02_25_Tusk_o_Granite.geojson",
+
+                        "Tusk o Granite",
+
+                        "2017-02-25",
+
+                        "",
+
+                        "trip-8c40fd0aac0d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-5d254015a1bf/map/2017_04_16_Mt_St_Helens_via_Worm_Flows.geojson",
+
+                        "Mt St Helens via Worm Flows",
+
+                        "2017-04-16",
+
+                        "",
+
+                        "trip-5d254015a1bf/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-4dcc9be78b7e/map/2017_05_06_Ingraham_Direct.geojson",
+
+                        "Ingraham Direct",
+
+                        "2017-05-06",
+
+                        "",
+
+                        "trip-4dcc9be78b7e/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-03497292b082/map/2017_05_21_Shuksan.geojson",
+
+                        "Shuksan",
+
+                        "2017-05-21",
+
+                        "",
+
+                        "trip-03497292b082/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-136b52bd578a/map/2017_06_11_Trappers_Peak.geojson",
+
+                        "Trappers Peak",
+
+                        "2017-06-11",
+
+                        "",
+
+                        "trip-136b52bd578a/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-466e9533256a/map/2017_06_25_The_Tooth.geojson",
+
+                        "The Tooth",
+
+                        "2017-06-25",
+
+                        "",
+
+                        "trip-466e9533256a/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-d380743c321e/map/2017_07_09_Black_Peak.geojson",
+
+                        "Black Peak",
+
+                        "2017-07-08",
+
+                        "",
+
+                        "trip-d380743c321e/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-4ec2c3466d21/map/2017_07_22_Emmons_Winthrop.geojson",
+
+                        "Emmons Winthrop",
+
+                        "2017-07-21",
+
+                        "",
+
+                        "trip-4ec2c3466d21/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-8d9bd7251071/map/2017_07_30_McClellan_Butte.geojson",
+
+                        "McClellan Butte",
+
+                        "2017-07-30",
+
+                        "",
+
+                        "trip-8d9bd7251071/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-f50e3ca54926/map/2017_08_26_Sloan_West_Face.geojson",
+
+                        "Sloan West Face",
+
+                        "2017-08-26",
+
+                        "",
+
+                        "trip-f50e3ca54926/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-0ec48d065a79/map/2017_09_05_Wonderland_Trail.geojson",
+
+                        "Wonderland Trail",
+
+                        "2017-09-05",
+
+                        "",
+
+                        "trip-0ec48d065a79/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-c5c2bb22b61d/map/2017_10_14_Atrium_Peak.geojson",
+
+                        "Atrium Peak",
+
+                        "2017-10-14",
+
+                        "",
+
+                        "trip-c5c2bb22b61d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-d3ca7bbd5186/map/2017_11_10_Hot_Springs.geojson",
+
+                        "Hot Springs",
+
+                        "2017-11-10",
+
+                        "",
+
+                        "trip-d3ca7bbd5186/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-505df277c855/map/2017_11_25_North_Mountain_Lookout.geojson",
+
+                        "North Mountain Lookout",
+
+                        "2017-11-24",
+
+                        "",
+
+                        "trip-505df277c855/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-807ba8e75b70/map/2017_11_24_Park_Butte_Lookout.geojson",
+
+                        "Park Butte Lookout",
+
+                        "2017-11-24",
+
+                        "",
+
+                        "trip-807ba8e75b70/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-5687fb924d26/map/2017_12_22_After_Six_and_Yosemite_Falls.geojson",
+
+                        "After Six and Yosemite Falls",
+
+                        "2017-12-22",
+
+                        "",
+
+                        "trip-5687fb924d26/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-e90ee4e809a1/map/2017_12_31_New_Years_2017-18.geojson",
+
+                        "New Years 2017-18",
+
+                        "2017-12-31",
+
+                        "",
+
+                        "trip-e90ee4e809a1/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-4ea1c416ca25/map/2018_03_03_Snoqualmie_Mountain.geojson",
+
+                        "Snoqualmie Mountain",
+
+                        "2018-03-03",
+
+                        "",
+
+                        "trip-4ea1c416ca25/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-319256836189/map/2018_04_14_Ancient_Lakes.geojson",
+
+                        "Ancient Lakes",
+
+                        "2018-04-14",
+
+                        "",
+
+                        "trip-319256836189/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-d8ac6b79d0b2/map/2018_05_20_Baker-easton.geojson",
+
+                        "Mt. Baker Easton",
+
+                        "2018-05-20",
+
+                        "",
+
+                        "trip-d8ac6b79d0b2/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-f76ea14fe6c5/map/2018_06_17_Red_Mountain.geojson",
+
+                        "Red Mountain",
+
+                        "2018-06-17",
+
+                        "",
+
+                        "trip-f76ea14fe6c5/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-c27aead82f8f/map/2018_06_24_Argonaut_and_Colchuck.geojson",
+
+                        "Argonaut and Colchuck",
+
+                        "2018-06-24",
+
+                        "",
+
+                        "trip-c27aead82f8f/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-ed832b64e706/map/2018_07_07_Silver_Star_and_Burgundy.geojson",
+
+                        "Silver Star and Burgundy",
+
+                        "2018-07-07",
+
+                        "",
+
+                        "trip-ed832b64e706/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-4e7d91bcefee/map/2018_07_29_JMT.geojson",
+
+                        "JMT",
+
+                        "2018-07-29",
+
+                        "",
+
+                        "trip-4e7d91bcefee/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-c8da6469f8fd/map/2019_05_10_Takhlakh_lake.geojson",
+
+                        "Takhlakh lake",
+
+                        "2019-05-10",
+
+                        "",
+
+                        "trip-c8da6469f8fd/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-a48bd4c25e02/map/2019_05_18_Chiwaukum.geojson",
+
+                        "Chiwaukum",
+
+                        "2019-05-18",
+
+                        "",
+
+                        "trip-a48bd4c25e02/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-07a291592d7c/map/2019_05_27_Ruth.geojson",
+
+                        "Mt Ruth",
+
+                        "2019-05-27",
+
+                        "ski",
+
+                        "trip-07a291592d7c/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-11d499accfbf/map/2019_06_22_Little_Tahoma.geojson",
+
+                        "Little Tahoma",
+
+                        "2019-06-21",
+
+                        "ski",
+
+                        "trip-11d499accfbf/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-92a4cf0a92e6/map/2019_06_29_DC_Attempt.geojson",
+
+                        "Rainier DC Attempt",
+
+                        "2019-06-28",
+
+                        "",
+
+                        "trip-92a4cf0a92e6/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-14c7889b5848/map/2019_07_14_Del_Campo.geojson",
+
+                        "Del Campo",
+
+                        "2019-07-14",
+
+                        "",
+
+                        "trip-14c7889b5848/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-aa1da1a5224c/map/2019_07_17_Outer_Space.geojson",
+
+                        "Outer Space",
+
+                        "2019-07-17",
+
+                        "",
+
+                        "trip-aa1da1a5224c/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-f6a574e60c69/map/2019_07_20_Goode_and_Storm_King.geojson",
+
+                        "Goode and Storm King",
+
+                        "2019-07-19",
+
+                        "",
+
+                        "trip-f6a574e60c69/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-ccdc45936b32/map/2019_07_27_Rainier_Kautz.geojson",
+
+                        "Rainier Kautz",
+
+                        "2019-07-27",
+
+                        "",
+
+                        "trip-ccdc45936b32/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-633f31104475/map/2019_08_01_Glacier_Peak.geojson",
+
+                        "Glacier Peak",
+
+                        "2019-08-01",
+
+                        "",
+
+                        "trip-633f31104475/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-99bc8320605b/map/2019_10_19_crystal_crag.geojson",
+
+                        "Crystal Crag",
+
+                        "2019-10-19",
+
+                        "",
+
+                        "trip-99bc8320605b/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-95d7fb83618d/map/2019_10_26_Big_Sur_Backpacking.geojson",
+
+                        "Big Sur Backpacking",
+
+                        "2019-10-26",
+
+                        "",
+
+                        "trip-95d7fb83618d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-903a598eb468/map/2019_12_24_LasTrampas.geojson",
+
+                        "Las Trampas",
+
+                        "2019-12-24",
+
+                        "",
+
+                        "trip-903a598eb468/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-37681c3f5d7f/map/2019_12_28_RoundTop.geojson",
+
+                        "Round Top",
+
+                        "2019-12-28",
+
+                        "",
+
+                        "trip-37681c3f5d7f/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-77db9293194a/map/2020_01_19_LasTrampas.geojson",
+
+                        "Las Trampas",
+
+                        "2020-01-19",
+
+                        "",
+
+                        "trip-77db9293194a/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-dcf59218f83f/map/2020_07_24_Stanislaus_peak.geojson",
+
+                        "Stanislaus Peak",
+
+                        "2020-07-24",
+
+                        "",
+
+                        "trip-dcf59218f83f/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-b0d18b3559f7/map/2020_07_25_Sword_Lake.geojson",
+
+                        "Sword Lake",
+
+                        "2020-07-25",
+
+                        "",
+
+                        "trip-b0d18b3559f7/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-dd2db440139d/map/2020_09_05_Tenaya_Cathedral.geojson",
+
+                        "Tenaya and Cathedral",
+
+                        "2020-09-05",
+
+                        "",
+
+                        "trip-dd2db440139d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-3bc7893dce1d/map/2020_10_11_Castle-Rock.geojson",
+
+                        "Castle Rock",
+
+                        "2020-10-11",
+
+                        "",
+
+                        "trip-3bc7893dce1d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-f1b74f5254f5/map/2020_10_30_Fairview_Dome.geojson",
+
+                        "Fairview Dome",
+
+                        "2020-10-30",
+
+                        "",
+
+                        "trip-f1b74f5254f5/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-efb3d08f7012/map/2020_11_21_Wrigley-Backpack.geojson",
+
+                        "Wrigley Backpack",
+
+                        "2020-11-21",
+
+                        "",
+
+                        "trip-efb3d08f7012/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-83b16c14efcb/map/2021_02_27_Sentinel-Dome.geojson",
+
+                        "Sentinel Dome",
+
+                        "2021-02-27",
+
+                        "",
+
+                        "trip-83b16c14efcb/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-2905d2dc06e5/map/2021_07_24_North_Pickets.geojson",
+
+                        "North Pickets",
+
+                        "2021-07-24",
+
+                        "",
+
+                        "trip-2905d2dc06e5/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-ecd602abea57/map/2021_12_19_Round-Top.geojson",
+
+                        "Round Top",
+
+                        "2021-12-19",
+
+                        "",
+
+                        "trip-ecd602abea57/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-2980240879fa/map/2022_07_09_Matthes-Crest.geojson",
+
+                        "Matthes Crest",
+
+                        "2022-07-09",
+
+                        "",
+
+                        "trip-2980240879fa/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-c776fbaa0245/map/2022_08_28_20220828_run_the-complete-dougherty-ridge_7716377019.geojson",
+
+                        "Dougherty Ridge",
+
+                        "2022-08-28",
+
+                        "run",
+
+                        "trip-c776fbaa0245/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-bd3b85702181/map/2023_01_07_Bear-Valley-BC.geojson",
+
+                        "Bear Valley BC",
+
+                        "2023-01-07",
+
+                        "",
+
+                        "trip-bd3b85702181/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-3637e89c2b20/map/2023_04_01_Lincoln-Peak.geojson",
+
+                        "Lincoln Peak",
+
+                        "2023-04-01",
+
+                        "",
+
+                        "trip-3637e89c2b20/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-fe574b9a32b3/map/2023_10_24_Diamond-Head.geojson",
+
+                        "Diamond Head",
+
+                        "2023-10-24",
+
+                        "",
+
+                        "trip-fe574b9a32b3/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-91223717407d/map/2024_02_16_Ostrander.geojson",
+
+                        "Ostrander",
+
+                        "2024-02-16",
+
+                        "",
+
+                        "trip-91223717407d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-9c148c58c8a2/map/2024_04_14_Rubicon-Peak.geojson",
+
+                        "Rubicon Peak",
+
+                        "2024-04-14",
+
+                        "",
+
+                        "trip-9c148c58c8a2/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-42b713d9403a/map/2024_05_21_Umpquah_Hot_Springs.geojson",
+
+                        "Umpquah Hot Springs",
+
+                        "2024-05-21",
+
+                        "",
+
+                        "trip-42b713d9403a/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-6c733d67ecf0/map/2024_05_22_Trillium_Falls.geojson",
+
+                        "Trillium Falls",
+
+                        "2024-05-22",
+
+                        "",
+
+                        "trip-6c733d67ecf0/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-f89ad0134317/map/2024_06_30_Eichorn_Pinnacle.geojson",
+
+                        "Eichorn Pinnacle",
+
+                        "2024-06-30",
+
+                        "",
+
+                        "trip-f89ad0134317/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-b4f3a463c98c/map/2024_07_19_Olympus.geojson",
+
+                        "Olympus",
+
+                        "2024-07-19",
+
+                        "",
+
+                        "trip-b4f3a463c98c/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-8724d00e6d4c/map/2024_08_03_Bear_Creek_Spire.geojson",
+
+                        "Bear Creek Spire",
+
+                        "2024-08-03",
+
+                        "",
+
+                        "trip-8724d00e6d4c/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-7ca1d3375231/map/2024_10_19_Donner-Peak.geojson",
+
+                        "Donner Peak",
+
+                        "2024-10-19",
+
+                        "",
+
+                        "trip-7ca1d3375231/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-fe89f93c01d3/map/2024_12_07_Silver-Peak.geojson",
+
+                        "Silver Peak",
+
+                        "2024-12-07",
+
+                        "",
+
+                        "trip-fe89f93c01d3/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-9460c7f89c70/map/2025_01_05_Elephants_Back.geojson",
+
+                        "Elephants Back",
+
+                        "2025-01-05",
+
+                        "",
+
+                        "trip-9460c7f89c70/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-96b28f380b32/map/2025_01_30_20250130_backcountryski_morning-activity_13494862984.geojson",
+
+                        "Source Lake",
+
+                        "2025-01-30",
+
+                        "ski",
+
+                        "trip-96b28f380b32/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-6d0195e1da8c/map/2025_02_12_20250212_backcountryski_booping-around-finding-a-few-p_13611970047.geojson",
+
+                        "Jackson Hole Backcountry",
+
+                        "2025-02-12",
+
+                        "ski",
+
+                        "trip-6d0195e1da8c/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-42dfa6e264b0/map/2025_03_08_Mount-Weird.geojson",
+
+                        "Mount Weird",
+
+                        "2025-03-08",
+
+                        "",
+
+                        "trip-42dfa6e264b0/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-f5d405afffd2/map/2025_07_13_20250713_kayaking_river-float_15103782605.geojson",
+
+                        "River float!",
+
+                        "2025-07-13",
+
+                        "kayak",
+
+                        "trip-f5d405afffd2/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-4256a1cba6be/map/2025_09_19_Black-Bute.geojson",
+
+                        "Black Bute",
+
+                        "2025-09-19",
+
+                        "",
+
+                        "trip-4256a1cba6be/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-addba8365e3d/map/2025_10_02_Wyoming-Scramble.geojson",
+
+                        "Wyoming Scramble",
+
+                        "2025-10-02",
+
+                        "",
+
+                        "trip-addba8365e3d/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-166d882dc085/map/2025_11_01_Tallac.geojson",
+
+                        "Tallac",
+
+                        "2025-11-01",
+
+                        "",
+
+                        "trip-166d882dc085/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-3166ceaf01c8/map/2026_02_20_Yangmingshan.geojson",
+
+                        "Yangmingshan",
+
+                        "2026-02-20",
+
+                        "",
+
+                        "trip-3166ceaf01c8/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-56649f59f137/map/2026_02_27_Ostrander.geojson",
+
+                        "Ostrander",
+
+                        "2026-02-27",
+
+                        "",
+
+                        "trip-56649f59f137/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-519717f1985a/map/2026_03_28_Lassen.geojson",
+
+                        "Lassen",
+
+                        "2026-03-28",
+
+                        "",
+
+                        "trip-519717f1985a/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-9655dfd023b8/map/2026_04_25_crescent-moon-couloir.geojson",
+
+                        "Crescent Moon Couloir",
+
+                        "2026-04-25",
+
+                        "",
+
+                        "trip-9655dfd023b8/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-1dd6f2964957/map/2026_05_21_Santa-Fe-Baldy.geojson",
+
+                        "Santa Fe Baldy",
+
+                        "2026-05-21",
+
+                        "",
+
+                        "trip-1dd6f2964957/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-388b02088d0e/map/2026_05_30_Dana.geojson",
+
+                        "Dana",
+
+                        "2026-05-30",
+
+                        "",
+
+                        "trip-388b02088d0e/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-76f1c1e61687/map/2026_06_01_Wasson-Peak.geojson",
+
+                        "Wasson Peak",
+
+                        "2026-06-01",
+
+                        "",
+
+                        "trip-76f1c1e61687/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-26db1fb639fd/map/2026_06_22_Rogue.geojson",
+
+                        "Rogue River",
+
+                        "2026-06-22",
+
+                        "",
+
+                        "trip-26db1fb639fd/"
+
+                    )
+
+                );
+
+            
+
+        
+
+            
+
+                promises.push(
+
+                    addTrack(
+
+                        "trip-c08d6fd9edef/map/2026_07_11_Death-Ride.geojson",
+
+                        "Death Ride",
+
+                        "2026-07-11",
+
+                        "",
+
+                        "trip-c08d6fd9edef/"
+
+                    )
+
+                );
+
+            
+
+        
+
+
+        await Promise.all(promises);
+
+
+        if (allLayers.length > 0) {
+
+            const group =
+                L.featureGroup(allLayers);
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [20, 20]
+                }
+            );
+
+        }
+
+    }
+
+
+    loadTrips();
+
+</script>
+
+</body>
+</html>
