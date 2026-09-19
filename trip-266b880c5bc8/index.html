@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mount Shasta Casaval Ridge</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Mount Shasta Casaval Ridge
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2023-05-19
+
+            
+                – 2023-05-20
+            
+
+            · Mountaineering
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                0.0
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                0
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                6
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    —
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">2.2</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>I had done Shasta via the Clear Creek route back in 20xx, and I was itching to try a route with a little more of a mountaineering feel. Casaval had been on my radar for a few years, but I had never gotten around to it. My brain is stuck in a North Cascades mindset and it doesn’t even occur to me to attempt a &gt;10kft+ volcano before May. And then invariably the snow routes are out within a few weeks of the roads opening. Jacob’s coworker Sean was interested in putting together a trip, and so I readily signed on. I skinned from the parking lot up to Horse Camp, where we set up tents. Jacob’s coworkers, two ultra runners named XX and XX, decided that they were below their needed mileage for the day, and so they set out to do a 5 mile snowshoe jog in order to keep up with their training plans. Sean, Jacob and I signed on to do Casaval, while xx and yy, who were new to mountaineering, opted to follow the conga line up Avalanche Gulch. We started out in climbing skins, but eventually got tired of the switchbacks and opted for booting. I was not in great shape, and was carrying ski boots and mountaineering boots—my AT boots would blister my feet horribly, and so two sets of boots had been my go-to back when I was in better shape while learning to ski in 2019. I reasoned that the extra weight was putting my summit in jeopardy, and so I ditched my ski boots and skis at XXXX ft. The snow traverse to gain the ridge was firm, and steep enough to get your attention. It was poor Jacob’s first time in crampons, and he had a harrowing time learning to trust the crampons and to establish a good self belay rhythm. The ridge itself was not nearly as committing as I worried. Staying on the true ridge would be a chossy challenge indeed, but there are infinite options to make the route easier by bypassing the crest, and bailing to the West face is almost always an option. The “catwalk” section was indeed narrow, with some tricky sublimating-ice-on-rock terrain that could be a bit unpredictable. Some technical walking, I suppose. The runout was not great, but was far from the thousand-foot void that I had feared it would be. Shortly after the catwalk, a cliff band blocks access to the plateau before Misery Hill. This is easily bypassed by boulder hopping to the left, but Sean went for a short Mixed line that gained the cliff. I began to follow, but was not feeling great about the last few committing moves, and I was really beginning to feel the altitude, so I downclimbed and took the cheater route around the side. By then, I was really feeling the altitude and strongly considered calling it there. Perhaps I got a bit of summit fever, but I resolved to set a good breathing routine and continue, one step at a time. I was slow, but I made it. Incredibly xx and xx scampered up the summit block 30 seconds after us. We had managed to all arrive at the summit at the same time. At the top of Red Banks, I badly wished for my skis, which were still stashed several thousand feet below. Some glissading and plunge stepping up high led to wallowing in rapidly softening snow as the angle decreased. Jacob was curing my name as we slogged through the slop to get back over to Casaval to retrieve our skis. The ski back to camp was better than the postholing, but the added effort of getting to the skis was not worth the reward. Some better skiing was to be had on the way back to the cars, at least.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Mountaineering";
+
+
+    const map = L.map("map").setView(
+        [
+            41.40921,
+            -122.1949
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

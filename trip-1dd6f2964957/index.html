@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Santa Fe Baldy</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Santa Fe Baldy
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2026-05-21
+
+            
+
+            · Trail Run
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                14.2
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                4355
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                3
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    12617
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">1</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2026_05_21_Santa-Fe-Baldy.gpx" download="2026_05_21_Santa-Fe-Baldy.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>I fly into Albuquerque a lot. Whenever I can bear to be outdoors, the mountains always look so appealing, but I invariably end up stuck in meetings all day and then need to run right to the airport to get home. With the flights out of ABQ it’s really hard to do a half day objective without burning an entire day. Which I am (technically) allowed to do, but there’s always something pressing that I need to get home for (e.g., staying married).</p>
+<p>I was in Santa Fe this time, with plans for a half day of meetings on my final day, followed by a mad dash to ABQ to make it on a 2pm flight. Magically the third day of my meeting was cancelled—an opportunity. A natural choice would be the Sandia Crest, but the logistics of that would require me to go straight from the crest to my flight, and I had no plans of finding out whether United will kick someone off a plane for being too smelly. Some research and I settled on Santa Fe Baldy. It is a natural objective from Santa Fe, starting from a trailhead at the Santa Fe Ski Basin.</p>
+<p>My plan was to get an early start, tag the summit, tag Lake Peak if time permitted, and get back to my hotel to shower while I still had the room, and then haul ass to the worst place in the world: ABQ Skyport Rental Car Center. The no-host social the previous night ended up dragging on longer than expected (my mistake was going to “one more bar” with the British visitors), and so I got a bit of a late and somewhat groggy start. Just like being back in my mid-20’s! I had not planned on having extra time to hike, and so my gear setup was not ideal.</p>
+<p>I had hiking pants, a running shirt, and my large Cotopaxi backpack suitcase filled with a few bottles of Gatorade, some snacks I had scrounged from the meeting refreshments, and my warmth later (i.e., my dress shirt from the previous day). Onwards!</p>
+<p>I powerhiked the uphills and jogged the downhills as I worked my way up and over the first pass and into the backcountry. The trail was not rough per se, but not exactly amenable to running, and I had a few close calls.</p>
+<figure id="photo-1">
+    <img
+        src="photos/001.jpg"
+        alt="Photo 1"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 1: A bird I saw on the trail. I ended up chasing this poor guy almost 50 yards.
+    </figcaption>
+</figure>
+<p>The final 1000’ climb from the saddle diverges from the main trail and steeply ascends a ridge line with a few moves of class 2, before a long traverse to the summit.</p>
+<figure id="photo-2">
+    <img
+        src="photos/002.jpg"
+        alt="Photo 2"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 2: Some great trail at 12,600 ft
+    </figcaption>
+</figure>
+<p>Boy was I missing my trekking poles! The 12,632’ summit was still below freezing in the early morning light and I was grateful I had packed that long sleeve dress shirt, although it wasn’t doing much as I sat at the summit. I kept the shirt on for much of the steep descent, as the trail was limiting my speed and therefore my heat generation.</p>
+<figure id="photo-3">
+    <img
+        src="photos/003.jpg"
+        alt="Photo 3"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 3: Quick summit selfie
+    </figcaption>
+</figure>
+<figure id="photo-4">
+    <img
+        src="photos/004.jpg"
+        alt="Photo 4"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 4: Time to add my &quot;layers&quot;
+    </figcaption>
+</figure>
+<p>The ascent and descent of the last 1000’ was on tricky enough terrain that I was getting behind schedule, and so I cut out my planned link up with Lake Peak on the way back and simply retraced my steps. As I gradually got closer to Lake Peak, I began to regret not making it up—the summit and ridgeline looked to have some nice exposure that would make for a really cool ascent, but the extra 1200 ft and 4 miles was going to put me in serious danger of missing my flight.</p>
+<figure id="photo-5">
+    <img
+        src="photos/005.jpg"
+        alt="Photo 5"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 5: Lake Peak: not today
+    </figcaption>
+</figure>
+<p>I was soon happier with that decision as soon as the trail bottomed out and began the climb back up to the first saddle. The last 4 miles HURT. Which is fair, because I had not done much running lately.</p>
+<p>I made it back to the car 9 minutes behind my self-imposed 10am cutoff for a 4:08 round trip. Another 45 minutes back to my hotel room, 30 minutes to shower and pack up, 75-minute drive to the rental car lot, the requisite 30 minutes of shuttle bus shenanigans, and I made it a whole hour before my flight! Maybe I could have managed Lake Peak after all.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Trail Run";
+
+
+    const map = L.map("map").setView(
+        [
+            35.81542,
+            -105.771825
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2026_05_21_Santa-Fe-Baldy.geojson",
+
+                    "2026_05_21_Santa-Fe-Baldy"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    1,
+
+                    35.80893611111111,
+
+                    -105.79365277777778,
+
+                    "A bird I saw on the trail. I ended up chasing this poor guy almost 50 yards.",
+
+                    "photos/001.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    2,
+
+                    35.830358333333336,
+
+                    -105.76022777777777,
+
+                    "Some great trail at 12,600 ft",
+
+                    "photos/002.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    3,
+
+                    35.83223055555556,
+
+                    -105.758075,
+
+                    "Quick summit selfie",
+
+                    "photos/003.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    4,
+
+                    35.83222222222223,
+
+                    -105.75806666666666,
+
+                    "Time to add my \"layers\"",
+
+                    "photos/004.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    5,
+
+                    35.832233333333335,
+
+                    -105.75806944444444,
+
+                    "Lake Peak: not today",
+
+                    "photos/005.jpg"
+
+                );
+
+            
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

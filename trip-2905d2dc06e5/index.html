@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>North Pickets Encirclement</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            North Pickets Encirclement
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2021-07-24
+
+            
+                – 2021-07-31
+            
+
+            · Mountaineering
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                70.1
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                58989
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                10
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    8267
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">2.5</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2021_07_24_North_Pickets.gpx" download="2021_07_24_North_Pickets.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>The Pickets is one of those “if you know, you know” places. For those who have been, no explanation is necessary. For those who haven’t, no explanation is possible. It is one of the most inaccessible places in Washington State, and arguably in the lower 48. Even by cascades standards, the bushwhacking is truly heinous and the steepness of everything is extreme. But the terrain is incredible, and you immerse yourself in a truly wild place less than a 150 minute drive from Seattle. After returning from my 8-day “backpacking trip” my coworkers invariably asked, “How many miles was it?” To which I replied, “I don’t know. It doesn’t matter.”</p>
+<p>I had gotten a taste of the Pickets several years prior when we attempted to access the Northern Pickets via the Hannegan trailhead and Perfect Pass. A perfectly seasonal July blizzard sent avalanches rumbling down Perfect Pass, and so all I had to show from a 4-day sufferfest was a whiff of the Pickets and a shredded glacier rope from shenanigans at the Imperfect Impasse. We resolved to return, with the caveat that we would “pay for the damn boat” to use the easier Big Beaver approach.</p>
+<p>True to our word, the same crew reassembled 3 years later and boarded the water taxi to head up Ross Lake. The weather window looked perfect, although we were at the tail end of a relentless high pressure system that had baked the region for most of July. We carried 8 days of food, assorted ultralight shelter options, and a smorgasbord of climbing accoutrements. And for some reason, a folding chair.</p>
+<p>Day 1: Big beaver to access creek Headwater After the water taxi left, we sat for a minute at the campground picnic bench. The trail infrastructure in the deep North Cascades backcountry is truly incredible. Despite the challenges ahead of us, the ability to grind out a dozen miles on a well-maintained trail in order to access the main event is really what makes a trip like this possible. Seriously, the trail workers are incredible. A heavy pack is virtually a requirement to visit the Pickets, unless you happen to be an Ultra runner with an enormous appetite for risk. For us mere mortals, the 8 days of food, plus rock and glacier gear was easily 70 lbs apiece. In hindsight, my brain tells me that we blasted up the Big Beaver trail until reaching Access Creek, but my notes from the day reveal something more along the lines of a sweaty grunt fest. A long bushwhack with occasional faint trail took us up to a cirque at the headwaters of Access Creek. My notes from the day: Long strenuous trail day with heavy pack. Moderate bushwhacking to stream crossing, then more bushwhacking into steep forest. Up to bench, then endless low angle bushwhacking through a wandering route. Primitive campsite just past treeline.</p>
+<p>The timing was perfect. The scenery opened up just as it was approaching dinner time. We cowboy camped in a flat spot under perfect weather.</p>
+<p>Day 2: Access creek to Luna col The route led up a rock and dirt gulley, which started out easy. It felt good to be getting some elevation without fighting underbrush. The gulley became looser and steeper the farther we got, and soon resembled 3rd class scrambling on dirt. We gained the ridge after about 1700 ft and were greeted with an incredible view of the Southern Pickets. This is how the range gets its name—its similarity to a vertical picket fence. From there the route ascends the ridge towards Luna Peak for a bit and then does a rising traverse to Luna Col. This was my first taste what would be a common adversary for the next week: traversing steep, blueberry- and heather-covered slopes. I was no stranger to a good veggie belay, but the combination of the scale, the runout, and the remoteness gave me some pause. This terrain is very real, and one bad step onto a slippery wooden branch would be enough to send someone tumbling hundreds of feet down the hill. Standard low probability, high consequence stuff, except the probability is noticeably higher than your standard cliffside trail, and the exposure is constant. Eventually the traverse gave way to some familiar rock and snow, and I thankfully pulled out my ice axe and got to work, ascending the rest of the way to Luna Col. This would be our campsite for the night. We arrived early in the day and rested for a few hours, before taking a side trip up to tag Luna. From Luna Col, the route ascends 2nd and 3rd class to a false summit. The true summit involves a few hundred yards of knife edge 4th class ridge without thousands of feet of exposure on either side. I opted to stay at the false summit. Some day I’d love to go back with a rope, but my risk calculus just wasn’t there. We had originally discussed descending down to Luna Lake from Challenger and then coming back up the other side of Luna Col to make our exit, but the slope looked absolutely heinous. Cliff bands, steep gullies, loose scree, and some, but not nearly enough snow. This would probably be very manageable in better snow coverage, but not so much for us then.</p>
+<p>Day 3: Luna col to Fury The traverse to Fury requires a steadfast belief that the route will go, because every step of the way seems so incredibly unlikely. My hat does off to the parties before who documented the way. An imposing cliff band with a tiny weakness that ends up being just big enough to casually stroll through. A giant’s staircase that goes with nothing more that a few unexposed 4th class moves (well, and one 5th class move with a fixed sling to enable it to be French freed). And then, the brush traverse. The slope steepens to &nbsp;50 degrees and becomes cliff bands interspersed with heather and blueberries. Navigating this section required absolute trust in the root structure of the bushes, which was not encouraging because every attempt at gaining a foothold sent dirt clods and rocks tumbling down the face. We may have been “off route,” but I suspect there was not a hidden easier way. Such is navigating the Pickets. A final slabby traverse brought us to the access to Fury glacier. The glacier was in late summer condition, but still very navigable, albeit circuitously. We encountered difficulties up to 50 degree snow just above the bergschrund. As Eric Gilbertson would later scientifically prove, the ice cap summit of Fury was gone. A hogsback snow ridge sat astride and slightly below a blocky summit. Camille, Ian, and I opted to chop out a sleeping platform below the hogsback, while Chad, Joe, and Evan selected a flat-ish wobbly rock for their sleeping quarters. I was a bit shaken from the exposed traverses of the day. At several points, I had simply accepted that I was trusting my life to a blueberry bush because there was no other option. I don’t like to take chances like that. Our plan at that point would involve descending the backside of Fury and contouring around the Western side of the Northern Pickets to Challenger. We had very little information about what lay ahead of us. This was the deepest in the wilderness I had ever been, and once we started down, it would become increasingly unlikely that we would be able to reverse our steps (however harrowing they had been) and make it back for our water taxi pickup. Continuing onward meant committing to facing and dealing with the unknown, and given my day, that was terrifying. But at the end of the day, it was a decision with imperfect information, and the group opted to continue. My preference had been to turn around, but especially in a case like this, turning around is not always the wisest decision. It was a well-considered discussion, and equally important to group decision making is to give the decision the best chance for success, even if it’s not what you wanted.</p>
+<p>Day 4: Fury to backside The rest of the party did West Fury, which is a lengthy out and back ridge traverse over several gendarmes. West Fury is one of the most rarely climbed peaks in Washington and it is not hard to see why. Much of it is loose and unprotectable. It requires at least a half day commitment from a peak where most parties are generally already stretching their food supplies just to reach it. I was not about it. With some more distance, I really would have liked to make the traverse, but I knew that at the time I would have been a liability and moving very slowly in a route that required efficiency. Ian and Camille also decided not to attempt it, but changed their minds in the morning. While the rest of the group made the traverse, I melted water—with the water they took for the traverse, we were totally out of water with no liquid available. I also broke camp and prepared a few things for an efficient pack up. I even found a bit of cell signal. The rest of the group returned in the mid afternoon, and we retraced the West Fury route back to the first col, and then embarked down the western side of Fury. Wayne Wallace had described that descent, on his way to climb Mongo Ridge a few weeks earlier, as fairly trivial. Certainly Wayne is more of a hardman than us, but I will also credit us with having to deal with vastly different snow conditions. This was becoming a theme. We were primarily on rock, rather than snow, and it was LOOSE. We dislodge multiple refrigerator-sized blocks that were apparently teetering on edge. Slabby sections covered in kitty litter that were likely snowfields a few weeks prior. Eventually we encountered a cliffband that could not be downclimbed. We rigged a rappel on a natural anchor and went down 30’ and then up a near-vertical 12’ moat. There was truly no reversing our steps now. Loose and wet conditions abounded; everyone in the party took falls on the snow sections, requiring self arrest, and all got banged up. 3000 feet down from the summit of Mount Fury, we were still on a tenuous loose scree slope, and the sun was rapidly setting. We made a last push to a flat-ish (perhaps merely a 12-degree slope) patch of blueberry bushes, and made camp. We loudly dared the National Park Service to come bust us for camping on the “fragile alpine foliage.”</p>
+<p>Day 5: down and up to Pickell Pass A side effect of Blueberry Camp was that several sleeping pads popped during the night. None of us slept well at all, but we were now on a timetable to finish our route and make the water taxi appointment (lest we need to walk the additional 12 miles out), and so we got up and out. The route beta that we had warned against an inviting canyon with easy travel that would end in a cliff. Instead we descended thick steep forest on the ridge to talus, then alternated between slide alder and steep loose canyons. Eventually we came to a wide cliff band blocking the way up to the start of Pickell Pass. We scouted for a route for a while before eventually opting to ascend a weakness on the far left consisting of 50 feet of mossy 3rd/4th class rock. However, this required us to traverse hard right at the top, across 40-degree blueberry slopes with the cliff band below. 30 minutes of traversing later, the blueberries yielded to talus. We moved up a hanging valley to the base of Pickell Pass. The pass was in 4 parts. First was a sloppy, wet snowfield. Second was a series of 3rd/4th class rock ramps. Third was another blueberry traverse and slope. Finally, a 4th class scramble up a ramp to gain the pass. Other than a few safer areas, the entire process was fairly exposed. Pickell Pass was a flat, lush oasis, and an obvious place to camp. It forms a col between Mount Crowder (with an excellent looking rock route) and the Northern Pickets massif. We could see much of the next day’s route from the pass, and it was clearly very doable. Still rugged off trail, of course, but after essentially 3 days of near constant no-fall zone, it was a huge relief. We had a delicious meal that ended with a bear can drum circle.</p>
+<p>Day 6: summit challenger and camp above Wiley lake We gleefully danced down from Pickell Pass and navigated the Phantom Arm. Ian had some aspirations of scrambling up Phantom Peak, but the route was clearly not going to go in the time that we had; perhaps in better snow conditions it would go faster. The back side of Phantom Arm was more challenging than the front, but entirely manageable. A glorious superhighway of heather benches led to a boulder field, and then some steep heather, up to the glacier flanking the SW slopes of Mount Challenger. We roped up and flew up the easy glacier. From the top reaches of the glacier, several couloirs offer access to the ridge separating the main Challenger Glacier. They are more frequently done as rappels, but Steph Abegg describes two options as short pitch of “looser low 5th class” and “more solid 5.6.” Once again, we were stymied by low snow conditions. The “low 5th” option ended up being a 60m pitch with difficulties ranging from kitty litter covered slap up to 5.9+. We had only brought a single pair of climbing shoes, and Evan, our strongest climber, did a harrowing lead with minimal gear. Evan, then a 5.12 leader, would describe his experience as “the most scared I have ever been on rock.” The transition point to rock was cramped and exposed at the top of a 40-degree snow slope, and so most of the party waited lower down on a rock island in the snow above the bergschrund. We fixed two ropes, one to haul packs, and one to ascend on in our mountaineering boots. One by one, we ascended the last 200 feet of snow and then roped in and made ascended to the ridge. The entire process took several hours, and I would later learn that the rock island was sitting in a perfect reflecting dish (maybe that’s why it was a rock island?) in the glacier; I got one of the worse sunburns of my life, despite reapplying sunscreen twice. I was the last to go. As Camille disappeared over the ridge, I felt the utter isolation of my position. Once we were all up the ridge, we made easy work of the glacier traverse, 5.7 pitch, and 5.0 exposed move to the summit of Challenger. A snack and some selfies, and then we rapped the summit block and boot skied down the final summit slopes, next to the yawning bergschrund. We roped back up and descended the rest of the glacier onto Wiley ridge. The ridge is, indeed, Wiley, requiring some interesting routefinding. We hit a col and ascended back up climbers left on a steep snowfield (thank god it wasn’t blueberries again) to gain a broad ridge. The ridge would take us down to Wiley Lake, which was still frozen, so we opted to camp above the lake at an established bivy site.</p>
+<p>Day 7: descend Wiley Ridge to Luna Camp We too an easy ridge traverse bearing right of the crest peak when needed until arriving at a steep basin. We needed to traverse the upper slopes of the basin, getting one final dose of Death Heather before picking up the ridge again. An easy grass slope eventually yielded to a steep forested slope. We embraced the bushwhack and fought our way downhill, gratefully and painfully popping out from a thicket of devil’s club onto the trail just before headlamps became necessary. We knocked out a few trail miles and then bivied at a flat spot.</p>
+<p>Day 8: Home! We crushed the trail miles back to Big Beaver camp and enjoyed a swim in Ross Lake before catching the water taxi back to the dam. We were greeted by the steep ascent back to the road that one always forgets about on these sorts of trips. One final hill climb, and we were back at the cars. Battered and tired, but largely successful.</p>
+<p>Fury south gully descent: scramble down from summit (exposed) along ridge, or descend south until a less exposed 3rd class option opens up. Both are heinously loose; despite taking significant care, we set loose a half dozen microwave sized blocks and innumerable basketballs and smaller. Take care of your fall lines when descending in a group. Work your way over to the col between the furies, then descend the main drainage that looks like (and later becomes) a death canyon. Descend snow and loose rock, we found the middle and skiers left to be less steep. In early summer or good snow years, this is likely easier, but we encountered snow patches broken up by cliff bands, requiring careful scrambling, a rappel, and 12ft of vertical snow to exit a moat. Beware thin snowpack with water running underneath. Exit canyon at 6900ft, before the walls become steep. Trend skiers left and down on loose rock ranging from roller balls to basketballs, keeping in mind that you have another canyon to cross before 6400 ft, after which it joins the death canyon. Cross this canyon, then continue descending and trending left, aiming for an obvious green bench where the treeline begins. There is a flat-ish blueberry bench just before the trees that makes for a brushy, but workable bivy.</p>
+<p>Bits and pieces: Who is dirtbaggiest, Camille has Arc&#x27;teryx everything. Chair time Sketchy joe Mystery peanut butter Not sure whether wright sandbagged us hard, or he&#x27;s just a hardman, or if snow conditions dramatically changed in the last 3 weeks. Probably a little bit of each.</p>
+<p>Some astrophotography looking at Mount Fury. This 8-day trip to the Pickets was fortunate to have perfect weather and no major setbacks, which is frankly shocking for a place known for terrible weather and abundant objective hazards.</p>
+<p>One thing that really struck me about this trip was the level of commitment. On the fourth morning we woke up in a flat-ish blueberry/heather bench, after having descended a rarely-done route in low snow conditions, including a tenuous rappel that could not be reversed.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Mountaineering";
+
+
+    const map = L.map("map").setView(
+        [
+            48.83084,
+            -121.27207
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2021_07_24_North_Pickets.geojson",
+
+                    "2021_07_24_North_Pickets"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

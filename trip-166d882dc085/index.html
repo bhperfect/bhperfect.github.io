@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Late Fall Desolation Backpacking</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Late Fall Desolation Backpacking
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2025-11-01
+
+            
+                – 2025-11-02
+            
+
+            · Backpacking
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                15.1
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                7356
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                4
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    9744
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">1</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2025_11_01_Tallac.gpx" download="2025_11_01_Tallac.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>I decided to take Cali on her first overnight backpacking trip for a late fall weekend in the Desolation Wilderness. I had been up Tallac once previously with my sister in 2021, and had been over the col into the Desolation area the year after during the winter. I had been itching to explore the area in the summer, as there is lots of peakbagging to be had, and some fun scrambling and rock routes. Permits can be tricky, however, and due to my lingering Morton’s neuroma I was scared to do anything more involved than Class 2. So, I waited out the end of the quota season and snagged an overnight permit.</p>
+<p>We started from the Glen Alpine trailhead just after lunch and hit the trail, quickly working our way up the valley. We made it to Gilmore Lake, near which I had camped with my sister in 2022, and dropped my camping gear. We set of for Dick’s Peak, a few miles away. Dick’s is supposed to involve an increasingly difficult scramble and various trip reports describe varying difficulty of route finding, with significant penalties for getting off route. I was curious to see how well Cali would handle the scrambling.</p>
+<figure id="photo-1">
+    <img
+        src="photos/001.jpg"
+        alt="Photo 1"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 1: Cali looking majestic by Gilmore Lake, where we dropped our packs.
+    </figcaption>
+</figure>
+<p>We stayed on the PCT until the col between Dick’s Peak and Janine’s Peak. The traverse over to Dicks quickly became an exercise in rock hopping, which Cali took to immediately. Several snow patches were and endless source of entertainment. Over a false summit on the ridge, and the real scrambling began. Cali held her own, but we quickly came across a cruxy section at &nbsp;9500 feet. The scramble did not look too bad, but it is clearly not a good place for a dog. It is blocky, but the ground is very loose. For a human, it is some big steps and reachy scrambling, but for a dog it is insanely steep and loose. Cali tried a few approaches, but was clearly scared and unhappy, so we retreated back to camp.</p>
+<figure id="photo-2">
+    <img
+        src="photos/002.jpg"
+        alt="Photo 2"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 2: Looking back towards the saddle between Janine&#x27;s 
+and Dick&#x27;s Peak.
+    </figcaption>
+</figure>
+<p>The night was colder than I had expected, and while I brought a mat for Cali, she seemed to be cold, and so I ended up sharing the sleeping bag with her. The next morning I packed camp up and we set off to summit Mount Tallac, which I knew she was capable of. 15 minutes into the ascent, she saw a deer and took off. I lost her for about 10 minutes, whistling for her. Just as I was about to give up on finding her, she reemerged, wildly happy. Asshole.</p>
+<figure id="photo-3">
+    <img
+        src="photos/003.jpg"
+        alt="Photo 3"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 3: Summit selfie on Mount Tallac.
+    </figcaption>
+</figure>
+<p>She earned herself a leash the rest of the way up Tallac, and we snapped a selfie. The south end of Lake Tahoe was splayed out below, and the signature of a wind vortex was clearly visible in the water. This type of phenomenon can have several different causes, but the vorticity can likely be attributable to the dynamically &quot;tall&quot; mountains forcing the wind along Highway 50 to bend around the Desoluation Wilderness.</p>
+<figure id="photo-4">
+    <img
+        src="photos/004.jpg"
+        alt="Photo 4"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 4: Vortical flow on Lake Tahoe!
+    </figcaption>
+</figure>
+<p>There is a more direct trail coming off of Tallac that meets up with the trail that ascends from Fallen Leaf Lake and continues, more or less directly, back to Glen Alpine. I had been on part of this trail on my previous ascent of Tallac and it seemed like a great option to cut off some distance while seeing new terrain on the way back. The trail was pretty good, and we made good time for about 2 miles heading down from the summit. The gradual backside of Tallac eventually gives way to a steep slope that cuts down to the Glen Alpine creek, losing 1400 feet in a downward traversing mile.</p>
+<p>400 vertical feet into this traverse, the trail was interrupted by a rock slide. A severely steep rock feature above and level with the trail looked to be impassable, but there appeared to be a loose trail descending down the slide, presumably bypassing the washout and re-ascending on the other side of the cliff band. I started down, and Cali thundered after me, knocking rocks loose. I tried to call her back to me, but she could not re-ascend the loose rock. Keeping her on a leash, I slowly picked the least loose option, finally making it into a gully with a small creek. I poked around, looking for the bypass track that would lead us back up to the trail, but there was none to be found. The terrain above was extremely loose talus, with cliff bands above that. We would need to continue down the gulley.</p>
+<figure id="photo-5">
+    <img
+        src="photos/005.jpg"
+        alt="Photo 5"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 5: Looks like maybe a faint trail that circumvents the washout?
+    </figcaption>
+</figure>
+<figure id="photo-6">
+    <img
+        src="photos/006.jpg"
+        alt="Photo 6"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 6: View looking back up the gulley. Not getting back up that with the dog...
+    </figcaption>
+</figure>
+<p>The scrambling was not terrible for me, but Cali needed help in several places. The gulley was not as steep on the right, and I knew that the topo looked to be relatively friendly for the half mile or so back to our ascent trail, so I made an attempt to climb out of the gulley. It was loose scree, and Cali adamantly refused to climb up to me. I considered trying to carry her, but the fall potential was pretty bad, so back down we went. There were a few tricky boulder moves in the gulley that I needed to drag Cali down and catch her, which was no fun for anyone involved. Finally, the gulley cliffed out completely and there was no viable descent. The steeper left side was covered in low shrubs. Faced with no other choice, I made my way up to the start of the shrubs, called Cali over, picked her up, and tossed her into the brush. Her feet couldn’t reach the ground through the branches, so she was totally stuck, but at least relatively safe. We painstakingly made our way up the hill this way. For short stretches, I got her over my shoulders and managed a few staggering paces before I would collapse into an unseen hole in the terrain. Once out of the gully, the brush continued; extremely annoying, but no longer threatening. By this time, my phone was completely dead. We slowly made out way down the gentler slope to the main trail, and then walked out.</p>
+<figure id="photo-7">
+    <img
+        src="photos/007.jpg"
+        alt="Photo 7"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 7: Bushwhacking our way down the gulley
+    </figcaption>
+</figure>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Backpacking";
+
+
+    const map = L.map("map").setView(
+        [
+            38.892432,
+            -120.112523
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2025_11_01_Tallac.geojson",
+
+                    "2025_11_01_Tallac"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    1,
+
+                    38.89282222222222,
+
+                    -120.11400277777777,
+
+                    "Cali looking majestic by Gilmore Lake, where we dropped our packs.",
+
+                    "photos/001.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    2,
+
+                    38.90201111111111,
+
+                    -120.14726111111112,
+
+                    "Looking back towards the saddle between Janine\u0027s \nand Dick\u0027s Peak.",
+
+                    "photos/002.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    3,
+
+                    38.90598055555555,
+
+                    -120.09898055555556,
+
+                    "Summit selfie on Mount Tallac.",
+
+                    "photos/003.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    4,
+
+                    38.904938888888886,
+
+                    -120.09816944444444,
+
+                    "Vortical flow on Lake Tahoe!",
+
+                    "photos/004.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    5,
+
+                    38.883491666666664,
+
+                    -120.0962111111111,
+
+                    "Looks like maybe a faint trail that circumvents the washout?",
+
+                    "photos/005.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    6,
+
+                    38.882505555555554,
+
+                    -120.09564166666667,
+
+                    "View looking back up the gulley. Not getting back up that with the dog...",
+
+                    "photos/006.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    7,
+
+                    38.881772222222224,
+
+                    -120.09435277777777,
+
+                    "Bushwhacking our way down the gulley",
+
+                    "photos/007.jpg"
+
+                );
+
+            
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

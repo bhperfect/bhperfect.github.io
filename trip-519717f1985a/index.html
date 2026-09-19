@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lassen</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Lassen
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2026-03-28
+
+            
+
+            · Ski
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                11.6
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                8124
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                5
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    10447
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">1</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2026_03_28_Lassen.gpx" download="2026_03_28_Lassen.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>Coworker Cal and I met up with acquaintance Marie to ski Lassen. Cal and I carpooled up from the Bay after work on Friday and met Marie in the Devastated Area parking lot, just before the winter gate. A great night sky let us briefly preview the route before turning in for the night.</p>
+<figure id="photo-1">
+    <img
+        src="photos/001.jpg"
+        alt="Photo 1"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 1: Good night, Lassen.
+    </figcaption>
+</figure>
+<p>We got a relatively late start because we were anticipating the North face to be firm until later in the day, which proved to be a good choice. We left the parking lot at 7:30, just as the sun was starting to hit the upper mountain. Cal and I started in trail runners, which quickly became a game of how far we could get in the discontinuous but icy snow through the forest. Meanwhile, Marie was happily chugging along in ski boots. After a few too many slips, Cal and I put on ski boots and crampons, as we hit open country. Cal, nursing some respiratory issues from a recent cold, eventually bowed out and turned around. Marie and I found a good line and booted up, passing a few parties on the way.</p>
+<figure id="photo-2">
+    <img
+        src="photos/002.jpg"
+        alt="Photo 2"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 2: A beautiful day for skiing.
+    </figcaption>
+</figure>
+<p>On the summit plateau, we discussed next steps. It was clearly too firm for a good ski, and would likely remain that way for a while. We met up with a hiker from Georgia who had just done the summit route from the visitor center—an impressive slog, especially without the reward of the ski back. He was blown away that we were on skis and intended to ski down the mountain. Marie successfully convinced me to ski down the South face, with its substantially softer snow, although it came with the commitment of getting back up to the top.</p>
+<figure id="photo-3">
+    <img
+        src="photos/003.jpg"
+        alt="Photo 3"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 3: Incredible skiing on the South Face.
+    </figcaption>
+</figure>
+<p>We made the right call. The South Face was perfect corn, and I ripped down the open slope. Other than my Ostrander trip in February, which hadn’t actually involved very much skiing, these were my first real turns of the year. I was initially hesitant about how far I wanted to descend, fearing I would run out of energy on the uphill. But Marie later told me, “I saw the grin on your face from 200 yards away and knew you weren’t stopping until the bottom.” Not only were conditions perfect, but I could feel the rust shaking off with every turn, and I felt GOOD by the end.</p>
+<p>The slog back up was indeed a slog, and I was grateful to have Marie breaking trail. Back up on the summit plateau, we worked our way over to the summit pyramid in increasing wind and tagged the summit. I had hiked Lassen back in 2016 via the summer trail, but I much prefer it as a ski.</p>
+<figure id="photo-4">
+    <img
+        src="photos/004.jpg"
+        alt="Photo 4"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 4: Small mandatory scramble to the true summit.
+    </figcaption>
+</figure>
+<figure id="photo-5">
+    <img
+        src="photos/005.jpg"
+        alt="Photo 5"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 5: A bad as the winds were on the summit plateau, the band of condensation trailing Shasta&#x27;s summit told me that it was a whole lot worse 4000 feet higher up.
+    </figcaption>
+</figure>
+<p>I briefly considered skiing the couloir at the top of the summit pyramid, but the icy conditions had me a bit spooked. At the end of the last season I think I would have gone for it, but I hadn’t gotten enough practice this season to be willing to go for it. We started down from the shoulder on icy snow, traversing the upper slopes and looking for some good snow. We found patches of good snow and let loose again until inevitably finding another teeth-rattling icy section. Once off the main headwall we found consistent corn and managed to magically chain together nearly continuous snow until the last hundred yards before the road.</p>
+<figure id="photo-6">
+    <img
+        src="photos/006.jpg"
+        alt="Photo 6"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 6: Our approximate route up the North Face.
+    </figcaption>
+</figure>
+<p>Cal was back at the car, after having traversed over towards the crater for some photography, enjoying a beer and a book. We had made great time, and enjoyed jalapeno chips and beer in the parking lot, fielding questions from skiers hoping to summit on Sunday and from random tourists who could barely comprehend that people ski from the top.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Ski";
+
+
+    const map = L.map("map").setView(
+        [
+            40.493671,
+            -121.495797
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2026_03_28_Lassen.geojson",
+
+                    "2026_03_28_Lassen"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    1,
+
+                    40.515591666666666,
+
+                    -121.46483888888889,
+
+                    "Good night, Lassen.",
+
+                    "photos/001.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    2,
+
+                    40.49743333333333,
+
+                    -121.4890861111111,
+
+                    "A beautiful day for skiing.",
+
+                    "photos/002.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    3,
+
+                    40.484208333333335,
+
+                    -121.50591111111112,
+
+                    "Incredible skiing on the South Face.",
+
+                    "photos/003.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    4,
+
+                    40.486697222222226,
+
+                    -121.50709166666667,
+
+                    "Small mandatory scramble to the true summit.",
+
+                    "photos/004.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    5,
+
+                    40.488144444444444,
+
+                    -121.50513327777777,
+
+                    "A bad as the winds were on the summit plateau, the band of condensation trailing Shasta\u0027s summit told me that it was a whole lot worse 4000 feet higher up.",
+
+                    "photos/005.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    6,
+
+                    40.51564719444445,
+
+                    -121.46469994444445,
+
+                    "Our approximate route up the North Face.",
+
+                    "photos/006.jpg"
+
+                );
+
+            
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

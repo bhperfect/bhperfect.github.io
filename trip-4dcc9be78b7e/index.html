@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ingraham Direct</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Ingraham Direct
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2017-05-06
+
+            
+                – 2017-05-07
+            
+
+            · Mountaineering
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                11.1
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                7651
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                7
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    11538
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">2.5</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2017_05_06_Ingraham_Direct.gpx" download="2017_05_06_Ingraham_Direct.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>It started like most of my mountaineering trips do; too little sleep on Friday night, followed by an early Saturday departure. We were all eager to finally be going, since we had been waiting almost 3 months for a window of good weather. A plan that was originally conceived as an ambitions winter ascent gradually morphed into an early spring trip as we watched storm after storm roll through without a break. Weeks turned into months as the simple dream of “a 2-3 day long high pressure ridge without precipitation” eluded us through one of the worst winters on record. But finally, it was time, and seven of us made the drive up to Paradise, WA. The plan was to cruise up the 4500 vertical feet to Camp Muir at 10,000 ft, and then do some rescue skills practice before dinner and an early bedtime around 6PM. Plans quickly diverged. Miscommunication led to people trying to wait up for people who were in fact ahead of them, costing almost an hour when all was said and done. About 1/3 of the way to Muir, I began to realize that the discomfort I was feeling from the winter mountaineering boots that I had rented was beyond simple blisters. The searing pain in my ankle was, in fact, from a hard metal protrusion in the boot shell pressing into my ankle. The rigid outer top of the boot was pressing a nerve in my shin, causing an explosion of pain down my toes every few steps. I struggled up to about 8500 feet before deciding that I needed to get out of these boots, damned be the consequences. A dark, wet patch in my sock confirmed my fears as I pulled my boot off. The damn thing had chewed through the skin on my ankle. My options were 1500 feet up, or 3000 down. I decided that up would be shorter and therefore preferable, but that I was pulling myself out of the summit attempt. Camp Muir was as far as I would go, and I would nurse my injuries there and try to rig up some padding before the descent. In a moment of brilliance, I discovered that I could pull out the boot liner, fix that into my showshoe, and walk in that. It wouldn’t fly in the cold, technical terrain above Camp Muir, and it wouldn’t undo the damage, but at least I could walk and continue up for the time being. Meanwhile, Kyle was battling his own demons. An old knee injury came roaring back to life when he put on snowshoes for traction. His progress also slowed to a crawl, trying to find a gait that would allow him to walk pain free. Packs bursting with snowshoes, crampons, avalanche rescue gear, glacier climbing gear, AND all of the normal amenities for a 2 night trip, we were all a little slow. All told, we rolled into Camp Muir around 4:30PM. A relaxed cruise uphill had turned into a battle, and a lazy afternoon became a race to melt snow for water and eat before bedtime. Kyle, worried about his knees, suggested I might be able to fit into his boots if he didn’t attempt the summit. They were a little tight, but totally doable. We discussed route conditions with a few other parties, then had a quick meeting. 12:00am wakeup time, and the final decision was that Kyle would go and I would stay in camp. With full permission to sleep in, I went for a walk/limp while the others went to bed. I scrambled up a rocky outcrop near camp with some impressive eastern exposure, put on some music, and sipped on my summit whiskey as I waited for the sunset. With night quickly coming, I realized that the icy wind was not only beginning to pierce through the impressive thickness of my new down jacket, but it was also turning the snow slope I had ascended just 80 minutes before into hard ice. With only an ice axe and my Boots From Hell, I carefully picked my way down. Only able to kick out centimeter-thick steps in the ice, I was resentfully grateful for the rigidity of the boots. I noted that the early evening ice at this elevation would signal much harder, thicker ice near the summit. Oh well, not my problem. The team was well asleep by the time I quietly entered the shelter and crawled into my sleeping bag. This wasn’t the trip I had come for, but it was a nice reminder that it doesn’t always have to be about the objective. Sometimes it’s enough to just sit by yourself and admire the surrounding environment. “Where’s my axe? Is it over near you in the corner?” “Is Camille up yet?” “Who has the rope?” “Can you go flake it out outside and space out the tie-in points?” The sounds of midnight preparation filtered into my brain before I was conscious of the meanings of the words. I had been asleep perhaps 2.5 hours by this point, and I remembered feeling grateful that once the preparations were done, I would be able to fall back asleep. The warmth of my sleeping bag would feel that much better, knowing everyone else was awake and struggling in the predicted -15F windchill. The slight smile on my face as I continued to listen to the alpine start in progress quickly faded as I overheard one specific exchange, clear as day though the midnight din. “Kyle, are you getting up? How is your knee doing?” “It hurts, I can feel it cramping here in my sleeping bag.” “So you’re not coming? Alright, let’s get Brad up.” A hand started to wiggle my foot, and I grumbled in response, “Yeah, I heard, I’m coming.” 30 minutes later, we were on our way. We quickly passed over the intact Cowlitz glacier and made it over Cathedral gap, making our way down onto the Ingraham Glacier. This is where the real climb would start. The bootpack we had been following faded into oblivion, and we were on our own. The Ingraham glacier is a steep series of huge seracs and crevasses that crisscross down a steep, narrow gulley. In the dim moonlight, it was nearly impossible to pick out features, and as the route changes year to year, we only had a vague sense of a safe passage to the top. With the aid of long-exposure photography, we were able to discern several of the key perennial seracs and crevasses and plot a general route up. As we moved higher and higher, the wind picked up. Kyles boots, while infinitely more comfortable, were not intended for this weather. My toes went numb, and I made a concerted effort to wiggle them intermittently and force some blood through them. Mike, leading the two rope teams, expertly picked his way upwards through the smaller crevasses not revealed by our photographic survey. As the slope increased, so did the iciness. Progress slowed. Nick noted that his crampons weren’t catching very well and that his hands were showing signs of early frostbite. Mid conversation with him, I quickly whipped around when I heard someone shout, “Falling!” from above. The leading rope team had already dropped into self arrest position as Mike ground to a halt, 20 feet from the edge of a crevasse that could have easily swallowed the entire rope team. While attempting to ascend a steep icy section, a crampon had lost purchase. Unbeknownst to us, his ankle had been sprained when a crampon caught on a chunk of ice during his fall, but the adrenaline of his close encounter was masking the injury, even to him. He cautiously picked his way back upwards and reported that the slope leveled out. We discussed trying to set up a belay if someone could lead through that section. Between the fall, Nick’s hands and crampons, and concerns about our pace yesterday, I spoke up in favor of bailing. After all, the ice would only get worse higher up, and there would be an even steeper headwall before we would exit off of the Ingraham. The decision was made, we were heading back to camp. Two parties were just coming off of Cathedral Gap as we turned around. I felt a tinge of regret as we moved downwards towards some fellow mountaineers who would probably have more success than us. My rope team got to the ascending parties first and we stopped to exchange information. We reported the conditions we had found, and they suggested we might have been off route. Suddenly, a radio crackled to life, “Uh, guys, Mike rolled his ankle.” We looked up to see the other rope team, ground to a halt. “Can he make it down here to Ingraham Flats, where there are no crevasses?” “Maybe.” We bid farewell to the ascending parties and watched as Mike struggled downhill the last 400 feet into Ingraham Flats. We were no longer returning from an unsuccessful summit bid; we were getting an injured climber down. We weighed our options. The route back followed a sloping traverse; it would be impossible to carry or pull him. Complicated splints conjured from our imaginations gave way to the simple truth: Mike could walk, slowly and painfully, but that was the best way back. We inched back to camp, empathizing with his pain through every step, as the rope joining us together forced us to move at the same pace. Shouting encouragement, I occasionally whipped out my phone to snap a picture of the gradually lightening sky. I would also intermittently steal a glace backwards at the ice slope that had defeated us. The other party was making their way up, initially along what appeared to be the true route, but they found themselves defeated by overhanging ice and eventually made their way to the place we had turned around. Our radio, tuned to their frequency by chance, picked up an exchange, cursing the steep, icy slope and announcing that they, too, would be turning around. Vindication. Exhausted from the slow limp back to camp, we crawled back into bed and caught a few hours of sleep. With luck, the snow would soften up and Mike’s ankle would improve to the point we could walk out. That was not the case, as he only made it about 70 yards before his worsening ankle forced him to stop. 5 miles and 4500 feet above the parking lot, he was essentially immobile. We radioed the ranger and requested the use of the emergency sled that is stored in the public shelter. They gave us the go-ahead, and we rigged up the sled. Mike would sit in it with his pack, as four people, roped in to the corners of the sled by their harnesses, would slowly walk him down. Progress was slow on the ice, but as we gained confidence in the mechanics of the sled and the snow softened, we increased the pace. I was back in my Boots From Hell, but I could tough it out for the time being. When possible, I would carve out a glissade trail, and Mike would glissade after me, carefully controlling his speed and protecting his injured ankle. This greatly reduced the burden of the sled and increased our speed. At one point, while traversing with the sled, I quickly tried to position myself downhill, anticipating the sled turning over, but slipped and fell, the head of my ice axe pinching my thumb on the snow. Blood quickly blossomed and Camille handed me some tape as I made fast work of rinsing and wrapping the cut on my thumb. 2 minutes after the fall, I was set to go, leaving behind a small part of my pride and a piece of abstract art, painted in red speckles on the canvas of the snow. Glissading down a particularly steep hill, I cautiously inched to the lip before letting myself go over the precipice. Rapidly, I accelerated to a terrifying pace. Chunks of snow from the morning climbers going up the hill vibrated under my butt, and I instinctually bent my knees and lifted up my feet, hoping to avoid another ankle injury. Braking hard, I eventually brought the pace under control and glided to a stop. Ian followed me, and I thought about shouting a warning about the chunks of snow and ice, but ultimately didn’t. Ian picked up speed, and ground to a halt suddenly. His ice axe had hit a chunk of ice and jerked his arm up and back, dislocating his shoulder. Mike followed, taking extra care to control his speed, sufficiently warned by Ian and I. Josiah skied down with the sled, somehow maintaining control of not only himself, but the 60 pound burden tied to his waist. Nick, Camille, and Josiah, on skis, tied in in formation around the sled and continued to ski Mike down to the parking lot. Kyle, Ian and I would be walking. Ian could walk, but was in a lot of pain, and his pack was clearly making things worse. Cursing myself for not taking a radio from the skiers, or asking them to take Ian’s pack in the sled, I watched Ian’s pace with dismay. 20 steps, pause and grimace. 10 steps, pause and groan. By now, the snow had softened, and we were postholing. Every step ran the risk of sinking a foot or more into the snow, which for me was an inconvenience, but for Ian was a profoundly painful experience. I put Ian’s snowshoes on him, to hopefully result in a smoother stride. By this point my boots were getting unbearable again, so I removed the shells and put the snowshoes on my liners. I also took Ian’s pack, reasoning that even with double weight, I would still be moving faster than him. Kyle stayed with Ian and I moved ahead, wanting to get the extra weight off of me as soon as possible. As we got closer to Paradise, weekender crowds increased. I’m probably in around 50 tourist pictures of Mt Rainier, a head poking out from a pack on the front and a pack on the back, snowshoes bending unnaturally under weight well in excess of their rating. Unfortunately, the deeply pocked snow left over from thousands trundling through the soft terrain meant that my showshoes were getting twisted into deep holes that I couldn’t see over the extra pack I was wearing on my front. 200 yards from the parking lot, the snow was nearly impassable for me. As my snowshoe once again sunk into a hole at an awkward angle, this time I couldn’t recover my balance, and I fell over. A helpful stranger offered to take one of the packs and I gratefully accepted. I briefly considered turning him down for the principle of getting the extra pack “all the way” back, but looking at the state of the snow, it might as well have been another mile. As he hefted Ian’s pack on his back he exclaimed, “Holy shit, this must be 45 pounds!” I nodded in agreement and thanked him profusely, feeling like I could skip the rest of the way under only my own pack, and with full visibility of the holes in the snow. Alone in the parking lot, I felt strange. I was surrounded by tourists come to play in the snow, most in tennis shoes, some screeching around the parking lot in brand new high end snowshoes. Children gawked at me, but the parents were indifferent. Normally I would engage with the children and humor their questions, but not today. In the 29 hours since we left the cars, I had been awake for 25 of them. It was 3pm, almost 12 hours since Mike’s fall. When I summited Rainier last year, the fatigue was perhaps greater, since it had involved more distance and elevation gain, but this was exhaustion. With the packs off, I became cognizant of the pain in my feet inflicted by the Boots From Hell. My thumb had bled through its wrapping. Between controlling Mike’s sled and having an extra pack, I hadn’t taken the time to reapply sunscreen, and I could already feel the burn. The mental effort of carefully considering every step, and quickly maneuvering to recover from a snowshoe that suddenly slides into a hole is infinitely greater than recklessly plunge stepping down with your triumphant companions. Ian and Kyle entered the parking lot 10 minutes after me and we walked over to the cars. Amazingly, the beers I had stashed in the car were still cold, and I cracked one open. I guess not everything had gone wrong.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Mountaineering";
+
+
+    const map = L.map("map").setView(
+        [
+            46.82119,
+            -121.730894
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2017_05_06_Ingraham_Direct.geojson",
+
+                    "2017_05_06_Ingraham_Direct"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>
