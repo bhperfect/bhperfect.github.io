@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wasson Peak</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Wasson Peak
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2026-06-01
+
+            
+
+            · Trail Run
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                7.7
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                1914
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                2
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    4637
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">1</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2026_06_01_Wasson-Peak.gpx" download="2026_06_01_Wasson-Peak.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>This was one of those silly trips where you fly to another state for a 2-hour meeting. But said meeting is early enough in the morning that you need to fly in the day before. I was traveling with my coworker Paul, who is the sort of guy who is always rail thin without regularly working out, but every 3 months or so will bust out a 10 mile run at a solid pace.</p>
+<p>I wanted to keep up the momentum of using my work trips for peakbagging, but Tucson in June is not a good time to do it. I had spent the flight looking at peakbagging options, but most were going to be too far of a drive or too far for the time we had available. I ended up settling on Wasson Peak as a nearby option with some decent prominence and a very manageable 8 miles/2kft. The only problem is it was 110 degrees when we landed.</p>
+<p>Paul and I hid in our hotel rooms throughout the afternoon, banging out work emails, eventually emerging for dinner at an extremely high rated, but questionable looking establishment. We ate way too much mediocre food and drank way too much soda out of 32 oz Styrofoam cups. It was like a fever dream version the nameless midwestern fast food experience of the 90’s. Now that we were feeling full and slightly hating ourselves, it was time to go for the full masochistic experience. “So, now that it’s cooled off a bit, are we doing that hike?”</p>
+<figure id="photo-1">
+    <img
+        src="photos/001.jpg"
+        alt="Photo 1"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 1: It was solidly dusk when we parked.
+    </figcaption>
+</figure>
+<figure id="photo-2">
+    <img
+        src="photos/002.jpg"
+        alt="Photo 2"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 2: Saguaro National Park showing off its colors.
+    </figcaption>
+</figure>
+<p>We hemmed and hawed for slightly too long, and then needed to stop to pick up some waters, and arrived at the trailhead at dusk. Time to get started! We made decent time, our eyes gradually adjusting as the light faded into night. I had to quit jogging after stumbling heavily a few times, but the trail was steep enough that I didn’t want to go much faster anyway. The summit is accessed across a thin ridge and then a wraparound of the summit hump. Excellent views of the Tucson metro all around. We brought out cell phone cameras to aid in the descent, with Paul galloping off like a mountain goat and leaving me in the dust.</p>
+<figure id="photo-3">
+    <img
+        src="photos/003.jpg"
+        alt="Photo 3"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 3: Not much of a photo op, but the 360-degree lights were nice.
+    </figcaption>
+</figure>
+<figure id="photo-4">
+    <img
+        src="photos/004.jpg"
+        alt="Photo 4"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 4: Summit register
+    </figcaption>
+</figure>
+<p>We made it back to the car for a 2 hour round trip. Between us, we picked 13 cactus spines out of our legs and arms. I also got to tick off Saguaro National Park off of my parks list.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Trail Run";
+
+
+    const map = L.map("map").setView(
+        [
+            32.263722,
+            -111.15789
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2026_06_01_Wasson-Peak.geojson",
+
+                    "2026_06_01_Wasson-Peak"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    1,
+
+                    32.24764166666667,
+
+                    -111.16819444444445,
+
+                    "It was solidly dusk when we parked.",
+
+                    "photos/001.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    2,
+
+                    32.26165,
+
+                    -111.170675,
+
+                    "Saguaro National Park showing off its colors.",
+
+                    "photos/002.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    3,
+
+                    32.27328055555555,
+
+                    -111.14713888888889,
+
+                    "Not much of a photo op, but the 360-degree lights were nice.",
+
+                    "photos/003.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    4,
+
+                    32.27350277777778,
+
+                    -111.14655277777779,
+
+                    "Summit register",
+
+                    "photos/004.jpg"
+
+                );
+
+            
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

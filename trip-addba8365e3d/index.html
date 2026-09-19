@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wyoming Scramble</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Wyoming Scramble
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2025-10-02
+
+            
+
+            · Trail Run
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                6.9
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                1815
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                2
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    9060
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">1</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2025_10_02_Wyoming-Scramble.gpx" download="2025_10_02_Wyoming-Scramble.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>I was up in Cheyenne for work and my meeting ended early in large part due to the government shutdown that began the day before meant that all of the feds were immediately recalled to their stations. I had a long drive back to Denver, but my flight home wasn’t until the morning, so that meant I had some time for peakbagging. I was still nursing my Morton’s Neuroma, and that meant that hiking was generally out and running was infrequent. I didn’t have any trekking poles or even a serviceable backpack, so my options were somewhat limited. The nice folks at Black Tooth Brewing the previous day had recommended Curt Gowdy State Park, so I elected to head out West on Highway 210, but I quickly realized that the state park was more of a waterfront/campground than a mountain. I pulled over and looked a little more west, to the Medicine Bow-Routt National Forest, which is a nice series of peaks sandwiched between Highway 210 and Highway 80. I found the highest point in the forest and set my sights for that: Pole Mountain.</p>
+<p>There was a nice parking lot right off the highway, and some confusing signs related to the legality of driving on the dirt road that traversed the final two miles to the start of the trail network. I opted to park in the obvious location and eat some road miles rather than risk getting into trouble. I later discovered that the road was totally fine to drive on.</p>
+<p>I jogged the road miles, mildly annoyed after seeing several cars pass me after I was about a mile in. There is no formal trail up Pole Mountain, but I found some GPS tracks on Peakbagger that suggested a relatively easy side quest from a trail on the West side. However, I was currently on the East side, and all of the trails circled around the north or the south of the entire mountain. I had just wasted precious minutes needlessly running on the road, so I resolved to take a shortcut straight up the Eastern flank.</p>
+<p>The country was fairly open, and the route went easily. Near the top rock features began to dominate, and I happily opted for some scrambling options rather than deal with the steep dirt. Glorious fall colors dotted the landscape below me.</p>
+<figure id="photo-1">
+    <img
+        src="photos/001.jpg"
+        alt="Photo 1"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 1: Fall colors abound
+    </figcaption>
+</figure>
+<p>I was getting sharp stabs of pain in my foot occasionally, but I didn’t care: I was on rock for the first time in over a year.</p>
+<figure id="photo-2">
+    <img
+        src="photos/002.jpg"
+        alt="Photo 2"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 2: Yummy rocks.
+    </figcaption>
+</figure>
+<p>The summit was quite satisfying, with great views in 3 directions. I scrambled down off the back, planning to work my way over to the trail. The descent was surprisingly technical; that is to say, I managed to get cliffed out while not planning my route particularly carefully. A few class 3 moves that were almost certainly not the easiest way down, and I was moving through open country again. I angled down and northeast to a saddle and then started ascending back up the other side. This took me up to Leg Benchmark, which depending on your source is either flirting with the 200’ prominence cutoff to being a true subpeak of Pole Mountain, or is actually the taller of the two. Might as well tag both.</p>
+<figure id="photo-3">
+    <img
+        src="photos/003.jpg"
+        alt="Photo 3"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 3: My chosen path up to Leg. Are there easier ways? Maybe.
+    </figcaption>
+</figure>
+<figure id="photo-4">
+    <img
+        src="photos/004.jpg"
+        alt="Photo 4"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 4: Nice ledge in trail runners.
+    </figcaption>
+</figure>
+<p>The ridge containing Leg Benchmark was actually guarded by a 40’ cliff band, which was a bit of a welcome surprise. I found a weakness and scrambled up, with 2 moves of 4th class, to the ridge. A super fun jog along the ridge to the North led me back to trail. The trail wrapped clockwise around Pole Mountain on fun terrain and led me back to the junction where I had originally left the road. A few unwelcome dusty, hot, thirsty road miles brought me back to the car.</p>
+<p>The best route back towards Denver actually led me a bit West to meet up with I-80, where I discovered that at 8640 feet is the highest point on the whole interstate. It’s apparently a whole deal, and for some reason there is a giant bust of Abraham Lincoln. Because nothing better exemplifies the grandeur of the interstate highway system that a man who died a century before it was made.</p>
+<figure id="photo-5">
+    <img
+        src="photos/005.jpg"
+        alt="Photo 5"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 5: Well who knew!
+    </figcaption>
+</figure>
+<figure id="photo-6">
+    <img
+        src="photos/006.jpg"
+        alt="Photo 6"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 6: Honest Abe, inventor of I-80?
+    </figcaption>
+</figure>
+<p>I took a pit stop in Fort Collins to see one of my favorite bands, the Oh Hellos, kick off their tour. It was a bold choice to lead off on a tour starting at 7000’. The band was out of breath, but they still delivered! A few hours of sleep, and I caught the first flight home in the morning.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Trail Run";
+
+
+    const map = L.map("map").setView(
+        [
+            41.231858,
+            -105.386769
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2025_10_02_Wyoming-Scramble.geojson",
+
+                    "2025_10_02_Wyoming-Scramble"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    1,
+
+                    41.239069444444446,
+
+                    -105.39306388888889,
+
+                    "Fall colors abound",
+
+                    "photos/001.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    2,
+
+                    41.23096666666667,
+
+                    -105.3890138888889,
+
+                    "Yummy rocks.",
+
+                    "photos/002.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    3,
+
+                    41.23123888888889,
+
+                    -105.39401666666667,
+
+                    "My chosen path up to Leg. Are there easier ways? Maybe.",
+
+                    "photos/003.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    4,
+
+                    41.23128611111111,
+
+                    -105.39413333333334,
+
+                    "Nice ledge in trail runners.",
+
+                    "photos/004.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    5,
+
+                    41.23815555555556,
+
+                    -105.43563611111111,
+
+                    "Well who knew!",
+
+                    "photos/005.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    6,
+
+                    41.240027777777776,
+
+                    -105.4372,
+
+                    "Honest Abe, inventor of I-80?",
+
+                    "photos/006.jpg"
+
+                );
+
+            
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

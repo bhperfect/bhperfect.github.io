@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Death Ride</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Death Ride
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2026-07-11
+
+            
+
+            · Bike
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                100.7
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                13900
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                5
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    8742
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">1.6</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2026_07_11_Death-Ride.gpx" download="2026_07_11_Death-Ride.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>This isn&#x27;t really a climbing/mountaineering trip, but I thought this was cool enough to deserve a post.</p>
+<p>I had heard about Death Ride before and had written it off as basically impossible for me. Over 100 miles and 13,000 feet of elevation gain. I had never managed more than the &nbsp;8600 feet of gain that I did on my Colchuck and Argonaut link up years ago, and the only century I had ever bike absolutely destroyed me. I had decided that 2026 would be my summer of fitness, and so I signed up with Jacob.</p>
+<p>The Death Ride climbs six passes (3 passes from both sides) in the Sierra Nevadas. Pretty much all of the real biking is on closed roads, which is incredible. There&#x27;s no other way to bike these passes without taking your life into your hands. The support and community are incredible too. There&#x27;s something about the atmosphere that helps you just keep on going.</p>
+<p>I had been doing a lot of general training, but was behind on my biking. True to my style, I also had a last minute work meeting pop up 2 days before that I couldn&#x27;t skip. Problem was, that meeting was in the UK. At least the time change would be working in my favor coming back. I caught the early flight on Friday morning out of Heathrow, arriving home by late afternoon. I grabbed a shower, pack, and then we loaded the bikes and left. We had a campsite reserved that night about a half hour from the start line. We got in around 10pm in the dark; I set up a quick bivy and caught a few hours of sleep before the 3am alarm.</p>
+<p>The Death Ride nominally starts at 5am, but many people will get an early start. It&#x27;s not a race, so no one is &quot;cheating&quot; by doing so. It just gives you fewer hours of cooking in the July heat. We had missed the afternoon/evening registration the day before, so we needed to pick up our bibs. All told, we were on the road at 4:30.</p>
+<figure id="photo-1">
+    <img
+        src="photos/001.jpg"
+        alt="Photo 1"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 1: On the road!
+    </figcaption>
+</figure>
+<p>Monitor Pass is first, going up and over until the junction with Highway 395. We took it very easy, stopping at all of the aid stations on the way. We had lunch at the bottom of Ebbets Pass and then kept moving. I dropped my backpack here; I usually like to bike with a backpack that lets me carry extra supplies and hydration, but I was really into the spirit of the &quot;supported ride&quot; and ditched it. I had an attack of calf cramps partway up Ebbets. All told, I probably drank about a liter of pickle juice throughout the day, trying to stay ahead of the cramping. This side of Ebbets is the largest climb of the day.</p>
+<figure id="photo-2">
+    <img
+        src="photos/002.jpg"
+        alt="Photo 2"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 2: At the top of Monitor Pass after ascending back up the back.
+    </figcaption>
+</figure>
+<figure id="photo-3">
+    <img
+        src="photos/003.jpg"
+        alt="Photo 3"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 3: Top of Ebbets.
+    </figcaption>
+</figure>
+<p>Going in, my threshold for a successful day would be to finish three passes. This would effectively be my first 10 kft day by any human-powered means, and I was prepared to be proud of that and call it. But even through I was pretty wrecked from Ebbets, I was not ready to be done yet. I started rolling downhill towards the Pacific Grade. This is the roughest stretch of road; I managed to vibrate one of my water bottles out of its holder. Suddenly, I was really regretting not having my backpack now.</p>
+<p>The Pacific grade is unfairly steep. I&#x27;ll admit, I had to walk a few sections. I think it was probably faster walking anyway. Once I had battled to the top of Pacific Grade, the hard part was over. Continuing down to Lake Alpine only added another 700 feet or so. And once I made it to that end, I would have to finish to get back to the car. This was the moment of commitment.</p>
+<figure id="photo-4">
+    <img
+        src="photos/004.jpg"
+        alt="Photo 4"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 4: Top of Pacific Grade!
+    </figcaption>
+</figure>
+<figure id="photo-5">
+    <img
+        src="photos/005.jpg"
+        alt="Photo 5"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 5: Back on top of Pacific Grade
+    </figcaption>
+</figure>
+<p>Ascending Pacific Grade from the west is far easier, but I was really feeling the heat and the length of the day. There was no aid station up there, so I pushed through to the bottom of Ebbets. I got a second wind coming up Ebbets, although I ended up needing to take a couple of breaks on the way. Just for fun, I checked the area where I had lost my water bottle; I saw a flash of white a bit off the road and down the slope, but it was a discarded beer can. However, I did find an entirely different water bottle. It even had some liquid in it! I wasn&#x27;t that desparate yet, but I was out of water and it was nice to have the option.</p>
+<p>The road back to the start is a long downhill, and I ended up pushing here. I regretted it as I started to die on the last 700 foot climb up to and through Markleeville. It was solid Type II fun pain cave, and I pedaled that last steep driveway up to the finish line totally exhausted. A popsicle and a nice cold beer brought be back to life.</p>
+<figure id="photo-6">
+    <img
+        src="photos/006.jpg"
+        alt="Photo 6"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 6: On the road!
+    </figcaption>
+</figure>
+<figure id="photo-7">
+    <img
+        src="photos/007.jpg"
+        alt="Photo 7"
+        loading="lazy"
+    >
+    <figcaption>
+        Photo 7: On the road!
+    </figcaption>
+</figure>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Bike";
+
+
+    const map = L.map("map").setView(
+        [
+            38.609834,
+            -119.756516
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2026_07_11_Death-Ride.geojson",
+
+                    "2026_07_11_Death-Ride"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    1,
+
+                    38.72528055555556,
+
+                    -119.80063888888888,
+
+                    "On the road!",
+
+                    "photos/001.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    2,
+
+                    38.67035,
+
+                    -119.62783055555555,
+
+                    "At the top of Monitor Pass after ascending back up the back.",
+
+                    "photos/002.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    3,
+
+                    38.544599999999996,
+
+                    -119.81161944444445,
+
+                    "Top of Ebbets.",
+
+                    "photos/003.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    4,
+
+                    38.48573611111111,
+
+                    -119.98733055555556,
+
+                    "Top of Pacific Grade!",
+
+                    "photos/004.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    5,
+
+                    38.515875,
+
+                    -119.90976111111112,
+
+                    "Back on top of Pacific Grade",
+
+                    "photos/005.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    6,
+
+                    38.72350277777778,
+
+                    -119.80070277777777,
+
+                    "On the road!",
+
+                    "photos/006.jpg"
+
+                );
+
+            
+
+        
+
+            
+
+                addPhotoMarker(
+
+                    7,
+
+                    38.64307222222222,
+
+                    -120.13588055555556,
+
+                    "On the road!",
+
+                    "photos/007.jpg"
+
+                );
+
+            
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>

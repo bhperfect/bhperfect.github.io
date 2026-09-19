@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Olympus</title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+
+
+        a {
+            color: #245f8a;
+        }
+
+
+        .trip-header {
+            margin-bottom: 2rem;
+        }
+
+
+        .trip-header h1 {
+            margin-bottom: 0.3rem;
+        }
+
+
+        .trip-meta {
+            color: #666;
+        }
+
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 1rem;
+
+            margin: 2rem 0;
+        }
+
+
+        .stat {
+            padding: 1rem;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            background: #ddd;
+        }
+
+
+        article {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .photo-popup-preview {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+
+        article h2 {
+            margin-top: 3rem;
+        }
+
+
+        article h3 {
+            margin-top: 2rem;
+        }
+
+
+        figure {
+            margin: 2.5rem 0;
+        }
+
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+        figcaption {
+            margin-top: 0.5rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .photo-marker {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 50%;
+
+            width: 28px;
+            height: 28px;
+
+            line-height: 24px;
+            text-align: center;
+
+            font-weight: bold;
+            font-size: 13px;
+
+            box-shadow:
+                0 1px 4px
+                rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main>
+
+    <p>
+        <a href="../">
+            ← All trips
+        </a>
+    </p>
+
+
+    <div class="trip-header">
+
+        <h1>
+            Olympus
+        </h1>
+
+
+        <div class="trip-meta">
+
+            2024-07-19
+
+            
+                – 2024-07-21
+            
+
+            · Mountaineering
+
+        </div>
+
+
+        
+
+    </div>
+
+
+    <h2>Trip Statistics</h2>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Distance
+            </div>
+
+            <div class="stat-value">
+                46.1
+                mi
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Elevation Gain
+            </div>
+
+            <div class="stat-value">
+                20889
+                ft
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Trip Quality/10
+            </div>
+
+            <div class="stat-value">
+                
+                8
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Maximum Elevation
+            </div>
+
+            <div class="stat-value">
+
+                
+
+                    7966
+                    ft
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fun Type</div>
+            
+            <div class="stat-value">2</div>
+        </div>
+    </div>
+
+    <h2>Route</h2>
+
+    
+    <ul class="gpx-downloads">
+        
+        <li>
+            <a href="gps/2024_07_19_Olympus.gpx" download="2024_07_19_Olympus.gpx">
+                Download GPX
+            </a>
+        </li>
+        
+    </ul>
+    
+
+    <div id="map"></div>
+
+
+    <article>
+
+        <p>After a flight delay and a chaotic time dealing with the SeaTac rideshare zone, I got to Nick and Sarah&#x27;s house at 12:30am. They had left the door open for me to get in, and I managed about 4 hours of sleep before the 5:20 wake up call. Some carpool pickups and car dropoffs later, and we were on our way, arriving at the park around 10:30. The goal had been to get there by 10am, but we weren&#x27;t too late. I got maybe an hour of sleep in the car. Upon arriving, we discovered the Hoh side of the park is severely capacity limited, and they operate on a one car out, one car in policy. It took 2 hours waiting in line to get in the park, which seems insane for a Friday morning. We used the delay to shuffle gear and generally get ready to move out ASAP. Timing where to do the gear explosion as the car inched forward was a key topic of debate.</p>
+<p>Cleo, Sarah, and I finally hit trail at 12:45, with nearly 18 miles to go. Nick was coming in on a later flight, planning to catch up with us at camp, and we had divided up about 20 pounds of his stuff to ease his speed trek. We pushed hard and made pretty good time, but the pace, weight, and failing light took their toll and we stopped 15.5 miles in at Elk Lake Camp. The extra 2 miles and 1500 ft gain to Glacier Meadows would be a future problem. We topped off water, ate dinner, got summit packs ready, and went to bed by 9:30. Nick, having flown in from San Francisco, had started hiking by 6pm and rolled into camp around 11pm.</p>
+<p>I had trouble falling asleep, but once I did, I got some high quality rest. At the 2am alarm I felt remarkably ready to go, despite the lack of sleep. We were a bit slow out of camp, 2:45 or so, largely due to general tiredness and the need to organize Nick&#x27;s gear-- he had justifiably dropped everything when he made it to camp. The climb to glacier meadows camp went smoothly, but Nick was knackered from a long week and the lack of sleep. He bailed out of the summit bid in favor of a well deserved nap in the Glacier Meadows shelter. Cleo, Sarah, and I continued on the climb up to the moraine crest. The top of the moraine is an excellent vantage to see the summit block and the glacier below it. I could see the bergschrund guarding the direct line; it appeared from afar that the key snow bridge that parties had reported using a few weeks prior had collapsed, necessitating the Crystal Pass route. More immediately, however, we needed to navigate a daunting climb down to the glacier. What was a mere blip on the topo map was a 500ft descent down loose scree. Perhaps several decades ago one might have walked directly onto the glacier, but we got to downclimb. The use trail was excellent as far as that goes, but every sliding step was a brutal reminder that we would need to regain it all again after the summit.</p>
+<p>From there, the trail crosses the terminal blue glacier, aptly named with hard blue ice extending nearly a mile across. We could see several parties ahead of us and set out across the eerie landscape just as we gained enough light to ditch the headlamps. The glacier crossing was very cool, if uneventful. Pools of meltwater have slowly bored into the ice, forming unfathomably deep puddles dotting the surface of the glacier. The sound of a rushing river many feet down echoed up through the crevasses. After crossing the glacier the route then trends climbers right up a series of snow and rock bands to circumvent the jumbled icefall of the Blue glacier and ascends the shoulder of the aptly-named Snow Dome. Sarah, leading the rope team, took an aggressive direct line up the 30-to-40 degree firm snow. We made good time, passing several parties.</p>
+<p>Topping out near the false summit of Snow Dome, we again inspected the bergschrund, and though we couldn&#x27;t tell for sure that it was impassable, we opted to go via Crystal Pass rather than gaining the 500ft needed to inspect its condition. The boot pack seemed to concur with that assessment; the 4th of July line trail looked to be at least a week old. Topping out at the Crystal Pass col, we rested briefly then ducked through a notch to find a low angle, unbroken glacier that would be our ticket to the top. We cruised up the glacier, eventually coming to an improbable-looking rock band that corresponded with our understanding of the route. A few hundred feet of class 2-3, followed by a nasty scree gulley down the other side out us at the base of a short snow climb to the base of the summit block. There may have been a bypass route around rather than up and over the rock, but we did not check for it.</p>
+<p>I had planned to lead the summit pitch when we drew up plans, but with Nick joining the trip, it was likely that he would take it for reasons of expediency. However, with Nick tapped out it was up to me. I had thought about this for years, wondering if I would be able to lead the pitch while exhausted from a climb, with a minimal set of nuts for pro, and knowing that I was over 20 miles deep in the backcountry. We also discovered that our rope was slightly short-- the pitch is about 33 meters and we had a 30m rope. Our solution was for Sarah to start simulclimbing at the middle mark after I got above the crux, and for Cleo to tie in at the end. Despite some minor climbing pacing challenges, the pitch was smooth and efficient, and we unroped to scramble the 30 feet to the true summit.</p>
+<p>The summit was busy with people, and we relished the views while waiting for the party before us to rappel down, who appeared to be coaching a number of novice climbers. Once they were clear, Cleo and I executed a single strand rappel to the base, staying wide of the climbing route. With rope stretch and taking a more direct line, we were able to make it down. Sarah then quickly rapped to the intermediate anchor and then down to the ground. Reversing our route to the summit block, we quickly got to the crest of Snow Dome. The steep descent down was the mental crux for Cleo and Sarah-- Cleo was worried about the steep slope above a nasty runout, and Sarah&#x27;s trail runners left her with poor traction. We made a slow falling traverse, while I kicked a new track above to arrest a potential fall and prevent Cleo from swinging. The only fall was a brief slip by Sarah, and Cleo caught her on body weight with no arrest needed.</p>
+<p>We continued down, and I took a minor fall when a foot blew out, arresting quickly but not before I cut my elbow on the ice.</p>
+<p>The Blue glacier was a different beast in the afternoon, full of flowing meltwater decorating the surface. The distinction between a surface puddle and a cavern descending to the depths of the glacier grew very small, and the network of crevasse crossings seemed vastly more labyrinthine than it did in the morning. Perhaps we were just tired, or the early morning light had masked some of the now-apparent dangers. After what felt like ages, we finally exited the glacier and gratefully unroped and removed crampons. My feet, which had been a bit banged up from the long approach, were now on fire from slamming around in slightly too tight boots during the cramponing. I also felt a deep tiredness creeping in that was deeper than something that more snacks could fix. This last part was going to suck.</p>
+<p>We made quick work of the moraine ascent, and then took the trail miles independently. After the pause at the moraine overlook, my feet protested greatly when I started moving. No more extended breaks for me-- if I stopped for too long I wouldn&#x27;t be able to start again. I gritted my teeth and plugged away, grimacing as each step on the loose, uneven trail slammed my tender feet and chipped away at my mental endurance. It took an hour and a half to cover the last 3.5 miles back to camp, and I plopped down on the ground in camp. My little toes were completely blistered despite taping, and my soles were swollen and discolored from being stuck in moisture all day. Not the worst I&#x27;ve had, but situated at the end of a long day was especially rough. Nick fetched water and cooked dinner as we nursed our wounds and relished the successful summit.</p>
+<p>An early bedtime and a lazy morning later, we set out again at 9:15am. The trail miles went easily. A hornet encounter left Nick and Sarah with a few stings each. My feet, having managed okay for the first 10 miles, degraded by the end, leaving me with a distinctive hobble (that Cleo mistook for a purposeful pantomime). We made it to the cars by 3:30 and found a nice beach to take a quick rinse in the frigid ocean. As predicted, my flight was delayed, so we had time to stop for dinner before dropping me off at the airport. The delays had grown worse in the meantime, and my flight didn&#x27;t get in until well past midnight, getting me home a bit before 1am. Just enough time to snag a few hours of sleep before heading into work.</p>
+
+    </article>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+    const activityColors = {"backpacking": "#4d7c0f", "bike": "#ea580c", "climbing": "#9333ea", "kayak": "#0891b2", "mountaineering": "#dc2626", "scramble": "#a16207", "ski": "#2563eb", "trail run": "#059669"};
+
+
+    const activity =
+        "Mountaineering";
+
+
+    const map = L.map("map").setView(
+        [
+            47.856331,
+            -123.763133
+        ],
+        11
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; OpenStreetMap contributors, SRTM | ' +
+                'Map style: &copy; OpenTopoMap (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    const routeLayers = [];
+
+
+    async function addTrack(
+        url,
+        name
+    ) {
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load track:",
+                url
+            );
+
+            return;
+
+        }
+
+
+        const geojson =
+            await response.json();
+
+
+        const layer =
+            L.geoJSON(
+                geojson,
+                {
+                    style: {
+                        color:
+                            activityColors[
+                                activity.trim().toLowerCase()
+                            ] || "black",
+
+                        weight: 4,
+
+                        opacity: 0.85
+                    }
+                }
+            );
+
+
+        layer.bindPopup(name);
+
+        layer.addTo(map);
+
+        routeLayers.push(layer);
+
+    }
+
+
+    function addPhotoMarker(
+        number,
+        latitude,
+        longitude,
+        caption,
+        photoUrl
+    ) {
+
+        const icon =
+            L.divIcon({
+
+                className: "",
+
+                html:
+                    `<div class="photo-marker">
+                        ${number}
+                    </div>`,
+
+                iconSize: [28, 28],
+
+                iconAnchor: [14, 14]
+
+            });
+
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ],
+                {
+                    icon: icon
+                }
+            );
+
+
+        const popup = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = `Photo ${number}`;
+        const link = document.createElement("a");
+        link.href = `#photo-${number}`;
+        const preview = document.createElement("img");
+        preview.src = photoUrl;
+        preview.alt = caption || `Photo ${number}`;
+        preview.className = "photo-popup-preview";
+        preview.loading = "lazy";
+        link.appendChild(preview);
+        const description = document.createElement("div");
+        description.textContent = caption;
+        popup.append(title, link, description);
+        marker.bindPopup(popup, { maxWidth: 240 });
+
+
+        marker.addTo(map);
+
+    }
+
+
+    function addWaypoint(
+        name,
+        latitude,
+        longitude,
+        type
+    ) {
+
+        const marker =
+            L.marker(
+                [
+                    latitude,
+                    longitude
+                ]
+            );
+
+
+        marker.bindPopup(
+
+            `
+            <strong>
+                ${name}
+            </strong>
+
+            <br>
+
+            ${type}
+            `
+
+        );
+
+
+        marker.addTo(map);
+
+    }
+
+
+    async function initializeMap() {
+
+        const promises = [];
+
+
+        
+
+            promises.push(
+
+                addTrack(
+
+                    "map/2024_07_19_Olympus.geojson",
+
+                    "2024_07_19_Olympus"
+
+                )
+
+            );
+
+        
+
+
+        await Promise.all(
+            promises
+        );
+
+
+        /*
+         * Only GPS-tagged photographs
+         * receive markers.
+         */
+
+        
+
+
+        /*
+         * Add explicit trip waypoints.
+         */
+
+        
+
+
+        /*
+         * Zoom to the GPS track.
+         */
+
+        if (routeLayers.length > 0) {
+
+            const group =
+                L.featureGroup(
+                    routeLayers
+                );
+
+
+            map.fitBounds(
+                group.getBounds(),
+                {
+                    padding: [25, 25]
+                }
+            );
+
+        }
+
+    }
+
+
+    initializeMap();
+
+</script>
+
+</body>
+
+</html>
